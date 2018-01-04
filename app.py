@@ -14,6 +14,7 @@ def submit():
 def control():
     print "Cooking Temperature: "+ request.form['target_temp']
     print "Cooking Time: "+ request.form['set_time']
+    print "ready time" + request.form['read_time']
     return render_template('form.html')
 
 if __name__== '__main__':

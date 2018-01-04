@@ -9,14 +9,14 @@ value="cooking temperature in C">
   </div>
   <div>
     <label for="set_time">Cooking Time</label>
-    <input name="set_time" id="set_time" onblur="this.value = this.value || this.defaultValue; this.style.color = '#999';"
-onfocus="this.value=''; this.style.color = '#000';"
-value="cooking time in min">
+    <input id="set_time" type="time" name="set_time">
+  </div>
+    <div>
+     <label for="ready_time">When would you like it ready? : </label>
+  <input id="ready_time" type="time" name="ready_time">
   </div>
   <div>
     <button>Start cooking!</button>
   </div>
 </form>
-
-
 
