@@ -12,10 +12,12 @@ def submit():
 
 @app.route('/control', methods=['POST'])
 def control():
-    print request.form['say']
-    return "hello"
+    print "Cooking Temperature: "+ request.form['target_temp']
+    print "Cooking Time: "+ request.form['set_time']
+    return render_template('form.html')
 
 if __name__== '__main__':
     app.run(host='0.0.0.0', use_reloader=True, debug = True)
+
 
 
