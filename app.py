@@ -13,8 +13,8 @@ def submit():
 @app.route('/control', methods=['POST'])
 def control():
     print "Cooking Temperature: "+ request.form['target_temp']
-    print "Cooking Time: "+ request.form['set_time']
-    print "ready time" + request.form['read_time']
+    print "Cooking Time: "+ request.form['set_time_hr'] + " : " + request.form['set_time_min']
+    print "ready time" + request.form['ready_time']
     return render_template('form.html')
 
 if __name__== '__main__':
