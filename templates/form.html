@@ -1,15 +1,22 @@
 <form action="/control"  method="post">
   <div>
-    <label for="target_temp">Target Temperature?</label>
-    <input name="target_temp" id="target_temp" value="Cooking Temperature">
+    <label for="target_temp">Cooking Temperature?</label>
+    <input name="target_temp" id="target_temp" 
+onblur="this.value = this.value || this.defaultValue; this.style.color = '#999';"
+onfocus="this.value=''; this.style.color = '#000';"
+value="cooking temperature in C">
+    
   </div>
   <div>
-    <label for="set_time">Set Time</label>
-    <input name="set_time" id="set_time" value="Cooking Time in min">
+    <label for="set_time">Cooking Time</label>
+    <input name="set_time" id="set_time" onblur="this.value = this.value || this.defaultValue; this.style.color = '#999';"
+onfocus="this.value=''; this.style.color = '#000';"
+value="cooking time in min">
   </div>
   <div>
     <button>Send my greetings</button>
   </div>
 </form>
+
 
 
