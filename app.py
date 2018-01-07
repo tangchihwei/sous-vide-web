@@ -6,16 +6,22 @@ import os
 app = Flask(__name__)
 
 with open("keys.txt") as f:
-	keys = f.read().splitlines()
+    keys = f.read().splitlines()
 
 ANOVA_MAC_ADDRESS = keys[0]
 
 os.environ["TZ"] = "US/Pacific"
 
 def get_time():
-	t=time.time()
-	time.tzset()
-	return (time.strftime("%T %Z", time.localtime(t)))
+    t=time.time()
+    time.tzset()
+    return (time.strftime("%I:%M %p", time.localtime(t)))
+
+def get_time_diff(current_time, ready_time):
+
+a = time.strptime(get_time(),"%I:%M %p")
+print type(a)
+
 
 @app.route('/')
 def index():
@@ -34,4 +40,5 @@ def control():
 
 if __name__== '__main__':
     app.run(host='0.0.0.0', use_reloader=True, debug = True)
+
 
