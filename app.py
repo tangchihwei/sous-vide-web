@@ -1,8 +1,14 @@
 from flask import Flask, request, render_template
+from pycirculate.anova import AnovaController
 import time
 import os
 
 app = Flask(__name__)
+
+with open("keys.txt") as f:
+	keys = f.read().splitlines()
+
+ANOVA_MAC_ADDRESS = keys
 
 os.environ["TZ"] = "US/Pacific"
 
@@ -10,6 +16,8 @@ def get_time():
 	t=time.time()
 	time.tzset()
 	return (time.strftime("%T %Z", time.localtime(t)))
+
+
 
 @app.route('/')
 def index():
@@ -28,3 +36,4 @@ def control():
 
 if __name__== '__main__':
     app.run(host='0.0.0.0', use_reloader=True, debug = True)
+
