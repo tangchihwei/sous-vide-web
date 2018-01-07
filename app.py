@@ -8,7 +8,7 @@ app = Flask(__name__)
 with open("keys.txt") as f:
 	keys = f.read().splitlines()
 
-ANOVA_MAC_ADDRESS = keys
+ANOVA_MAC_ADDRESS = keys[0]
 
 os.environ["TZ"] = "US/Pacific"
 
@@ -16,8 +16,6 @@ def get_time():
 	t=time.time()
 	time.tzset()
 	return (time.strftime("%T %Z", time.localtime(t)))
-
-
 
 @app.route('/')
 def index():
