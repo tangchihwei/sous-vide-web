@@ -17,11 +17,19 @@ def get_time():
     time.tzset()
     return (time.strftime("%I:%M %p", time.localtime(t)))
 
-def get_time_diff(current_time, ready_time):
+def get_time_diff(now, ready_time):
+	current_time=time.strptime(now,"%I:%M %p")
+	dinner_time = time.strptime(ready_time,"%I:%M %p")
+	print "current time: " + current_time
+	print "ready time2: " + dinner_time
 
-a = time.strptime(get_time(),"%I:%M %p")
-print type(a)
+# a = time.strptime(get_time(),"%I:%M %p")
 
+def float_compare(a, b):
+        threshold = 0.05
+        return abs(a-b) < threshold
+
+# anova = AnovaController(ANOVA_MAC_ADDRESS)
 
 @app.route('/')
 def index():
@@ -35,7 +43,9 @@ def submit():
 def control():
     print "Cooking Temperature: "+ request.form['target_temp']
     print "Cooking Time: "+ request.form['set_time_hr'] + " : " + request.form['set_time_min']
-    print "ready time" + request.form['ready_time']
+    print "ready time1" + request.form['ready_time']
+    get_time_diff(get_time, request.form['ready_time'])
+
     return render_template('form.html')
 
 if __name__== '__main__':
