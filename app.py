@@ -20,8 +20,13 @@ def get_time():
 def get_time_diff(now, ready_time):
 	current_time=time.strptime(now,"%I:%M %p")
 	dinner_time = time.strptime(ready_time,"%H:%M")
-	print "current time: " + str(current_time)
-	print "ready time parsed: " + str(dinner_time)
+	print "current time: " + str(current_time[3]) + " : " + str(current_time[4])
+#	print "ready time parsed: " + str(dinner_time)
+        print "ready time parsed: " + str(dinner_time[3]) + " : " + str(dinner_time[4])
+	if int(dinner_time[3])-int(current_time[3]) > 0:
+		return 60*(int(dinner_time[3]) - int(current_time[3])) + (int(dinner_time[4])-int(current_time[4]))
+	else:
+		return -1
 
 # a = time.strptime(get_time(),"%I:%M %p")
 
@@ -44,7 +49,7 @@ def control():
     print "Cooking Temperature: "+ request.form['target_temp']
     print "Cooking Time: "+ request.form['set_time_hr'] + " : " + request.form['set_time_min']
     print "ready time incoming: " + request.form['ready_time']
-    get_time_diff(get_time(), request.form['ready_time'])
+    print "mins to cook: " + str(get_time_diff(get_time(), request.form['ready_time']))
 
     return render_template('form.html')
 
