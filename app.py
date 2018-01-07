@@ -19,7 +19,7 @@ def get_time():
 
 def get_time_diff(now, ready_time):
 	current_time=time.strptime(now,"%I:%M %p")
-	dinner_time = time.strptime(ready_time,"%I:%M %p")
+	dinner_time = time.strptime(ready_time,"%H:%M")
 	print "current time: " + str(current_time)
 	print "ready time parsed: " + str(dinner_time)
 
