@@ -34,7 +34,7 @@ def float_compare(a, b):
         return abs(a-b) < threshold
 
 def delay_min(min):
-	while min i >= 0:
+	while min > 0:
 		print "waiting to start in ..." + str(min)
 		time.sleep(60)
 		min -=1 
@@ -42,7 +42,8 @@ def delay_min(min):
 # anova = AnovaController(ANOVA_MAC_ADDRESS)
 
 def set_sous_vide(target_temp, cook_timer):
-
+    print "set target temp"
+    print "cook time"
 
 @app.route('/')
 def index():
@@ -58,7 +59,8 @@ def control():
     print "Cooking Time: "+ request.form['set_time_hr'] + " : " + request.form['set_time_min']
     print "ready time incoming: " + request.form['ready_time']
     print "mins to start: " + str(get_time_diff(get_time(), request.form['ready_time']) - ANOVA_PRE_HEAT_TIME)
-
+    delay_min(2)
+    print "after 2 min"
     return render_template('form.html')
 
 if __name__== '__main__':
