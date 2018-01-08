@@ -35,7 +35,9 @@ def float_compare(a, b):
 
 def delay_min(min):
 	print "waiting to start in ..." + str(min)
-	
+	while min i >= 0:
+		time.sleep(60)
+		min -=1 
 
 # anova = AnovaController(ANOVA_MAC_ADDRESS)
 
