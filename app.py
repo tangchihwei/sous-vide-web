@@ -60,7 +60,7 @@ def control():
     cook_temp = request.form['target_temp']
     cook_time = request.form['set_time_hr'] * 60 + request.form['set_time_min']
     anova.set_temp(cook_temp)
-	anova.set_timer(cook_time)
+    anova.set_timer(cook_time)
     ready_time = request.form['ready_time']
     time_to_preheat = get_time_diff(get_time(), ready_time) - cook_time - ANOVA_PRE_HEAT_TIME
     if time_to_preheat < 0:
