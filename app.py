@@ -54,16 +54,22 @@ def test():
     print "in test"
     print "temp in test: "+ str(app.anova.read_temp())
     app.anova.set_temp(65)
-    app.anova.start_anova()
+    app.anova.set_timer(60)
+#    app.anova.start_anova()
 
 @app.route('/control', methods=['POST'])
 def control():
     #TODO: all the settings
     print "in control"
     cook_temp = request.form['target_temp']
-    cook_time = request.form['set_time_hr'] * 60 + request.form['set_time_min']
+    print "set time hr(min): " + str(int(request.form['set_time_hr'])*60)
+    print "set time min: " + request.form['set_time_min']
+    cook_time = int(request.form['set_time_hr']) * 60 + int(request.form['set_time_min'])
+    print "cook time: "+str(cook_time)
     app.anova.set_temp(cook_temp)
-    app.anova.set_timer(cook_time)
+    print "after set temp"
+    app.anova.set_timer(int(cook_time))
+    print "after set timer"
     ready_time = request.form['ready_time']
     print "cal time_to_preheat"
     time_to_preheat = get_time_diff(get_time(), ready_time) - cook_time - ANOVA_PRE_HEAT_TIME
