@@ -55,6 +55,11 @@ def index():
 def submit():
     return 'You entered: {}'.format(request.form)
 
+@app.route('/test')
+def test():
+    print "in test"
+    print "temp in test: "+ str(app.anova_controller.read_temp())
+
 @app.route('/control', methods=['POST'])
 def control():
     #TODO: all the settings
@@ -89,12 +94,12 @@ def control():
 
 def main():
     # Setup logging
-    logging.basicConfig(level=logging.INFO)
-    handler = logging.StreamHandler(sys.stdout)
-    handler.setLevel(logging.INFO)
-    formatter = logging.Formatter('%(asctime)s - %(name)s - %(levelname)s - %(message)s')
-    handler.setFormatter(formatter)
-    app.logger.addHandler(handler)
+#    logging.basicConfig(level=logging.INFO)
+ #   handler = logging.StreamHandler(sys.stdout)
+  #  handler.setLevel(logging.INFO)
+  #  formatter = logging.Formatter('%(asctime)s - %(name)s - %(levelname)s - %(message)s')
+   # handler.setFormatter(formatter)
+   # app.logger.addHandler(handler)
 
     app.anova_controller = AnovaController(ANOVA_MAC_ADDRESS)
     print "temp: " + str(app.anova_controller.read_temp())
