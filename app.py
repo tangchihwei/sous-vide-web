@@ -59,11 +59,13 @@ def test():
 @app.route('/control', methods=['POST'])
 def control():
     #TODO: all the settings
+    print "in control"
     cook_temp = request.form['target_temp']
     cook_time = request.form['set_time_hr'] * 60 + request.form['set_time_min']
     app.anova.set_temp(cook_temp)
     app.anova.set_timer(cook_time)
     ready_time = request.form['ready_time']
+    print "cal time_to_preheat"
     time_to_preheat = get_time_diff(get_time(), ready_time) - cook_time - ANOVA_PRE_HEAT_TIME
     print "time to preheat: " + str(time_to_preheat)
     if time_to_preheat < 0:
