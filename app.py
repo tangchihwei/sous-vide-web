@@ -28,6 +28,7 @@ def get_time_diff(now, ready_time):
 		return 60*(int(dinner_time[3]) - int(current_time[3])) + (int(dinner_time[4])-int(current_time[4]))
 	else:
 		return -1
+		# TODO: check to see whether ready time is for next day
 
 def float_compare(a, b):
         threshold = 0.05
@@ -55,13 +56,22 @@ def submit():
 
 @app.route('/control', methods=['POST'])
 def control():
-    print "Cooking Temperature: "+ request.form['target_temp']
-    print "Cooking Time: "+ request.form['set_time_hr'] + " : " + request.form['set_time_min']
-    print "ready time incoming: " + request.form['ready_time']
+    #TODO: all the settings
+    cook_temp = request.form['target_temp']
+    cook_time = request.form['set_time_hr'] * 60 + request.form['set_time_min']
+    ready_time = request.form['ready_time']
+    time_to_preheat = get_time_diff(get_time(), ready_time) - cook_time - ANOVA_PRE_HEAT_TIME
+    
+    delay_min(time_to_preheat)
+
     print "mins to start: " + str(get_time_diff(get_time(), request.form['ready_time']) - ANOVA_PRE_HEAT_TIME)
-    delay_min(2)
-    print "after 2 min"
     return render_template('form.html')
+    ###TODO:
+    #1. check whether it's too late to start scheduling. too late if ready_time-current_time-preheat_time - set_time <0. start immediately. 
+    #2. else 
+
+    #
+    
 
 if __name__== '__main__':
     app.run(host='0.0.0.0', use_reloader=True, debug = True)
