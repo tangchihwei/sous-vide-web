@@ -15,66 +15,6 @@ ANOVA_PRE_HEAT_TIME = 25
 
 os.environ["TZ"] = "US/Pacific"
 
-class RESTAnovaController(AnovaController):
-    """
-    This version of the Anova Controller will keep a connection open over bluetooth
-    until the timeout has been reach.
-    NOTE: Only a single BlueTooth connection can be open to the Anova at a time.
-    """
-
-    TIMEOUT = 5 * 60 # Keep the connection open for this many seconds.
-    TIMEOUT_HEARTBEAT = 20
-
-    def __init__(self, mac_address, connect=True, logger=None):
-        self.last_command_at = datetime.datetime.now()
-        if logger:
-            self.logger = logger
-        else:
-            self.logger = logging.getLogger()
-        super(RESTAnovaController, self).__init__(mac_address)
-
-    def set_timeout(self, timeout):
-        """
-        Adjust the timeout period (in seconds).
-        """
-        self.TIMEOUT = timeout
-
-    def timeout(self, seconds=None):
-        """
-        Determines whether the Bluetooth connection should be timed out
-        based on the timestamp of the last exectuted command.
-        """
-        if not seconds:
-            seconds = self.TIMEOUT
-        timeout_at = self.last_command_at + datetime.timedelta(seconds=seconds)
-        if datetime.datetime.now() > timeout_at:
-            self.close()
-            self.logger.info('Timeout bluetooth connection. Last command ran at {0}'.format(self.last_command_at))
-        else:
-            self._timeout_timer = Timer(self.TIMEOUT_HEARTBEAT, lambda: self.timeout())
-            self._timeout_timer.setDaemon(True)
-            self._timeout_timer.start()
-            self.logger.debug('Start connection timeout monitor. Will idle timeout in {0} seconds.'.format(
-                (timeout_at - datetime.datetime.now()).total_seconds())) 
-
-    def connect(self):
-        super(RESTAnovaController, self).connect()
-        self.last_command_at = datetime.datetime.now()
-        self.timeout()
-
-    def close(self):
-        super(RESTAnovaController, self).close()
-        try:
-            self._timeout_timer.cancel()
-        except AttributeError:
-            pass
-
-    def _send_command(self, command):
-        if not self.is_connected:
-            self.connect()
-        self.last_command_at = datetime.datetime.now()
-        return super(RESTAnovaController, self)._send_command(command)
-
 def get_time():
     t=time.time()
     time.tzset()
@@ -101,7 +41,7 @@ def delay_min(min):
 		time.sleep(60)
 		min -=1 
 
-anova = AnovaController(ANOVA_MAC_ADDRESS)
+# anova = AnovaController(ANOVA_MAC_ADDRESS)
 
 # def set_sous_vide(target_temp, cook_timer):
 #     print "set target temp"
@@ -120,17 +60,17 @@ def control():
     #TODO: all the settings
     cook_temp = request.form['target_temp']
     cook_time = request.form['set_time_hr'] * 60 + request.form['set_time_min']
-    anova.set_temp(cook_temp)
-    anova.set_timer(cook_time)
+    # anova.set_temp(cook_temp)
+    # anova.set_timer(cook_time)
     ready_time = request.form['ready_time']
     time_to_preheat = get_time_diff(get_time(), ready_time) - cook_time - ANOVA_PRE_HEAT_TIME
     if time_to_preheat < 0:
     	time_to_preheat = 0
-    	anova.start_anova()
+    	# anova.start_anova()
     	# update ready time
     else:
     	delay_min(time_to_preheat)
-    	anova.start_anova()
+    	# anova.start_anova()
 
     while not float_compare(float(anova.read_temp()), cook_temp):
         print "target_temp: "+ str(target_temp)
@@ -156,7 +96,7 @@ def main():
     handler.setFormatter(formatter)
     app.logger.addHandler(handler)
 
-    app.anova_controller = RESTAnovaController(ANOVA_MAC_ADDRESS, logger=app.logger)
+    app.anova_controller = AnovaController(ANOVA_MAC_ADDRESS, logger=app.logger)
     print "temp: " + str(app.anova_controller.read_temp())
 
     # try:
