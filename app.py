@@ -34,12 +34,15 @@ def float_compare(a, b):
         return abs(a-b) < threshold
 
 def delay_min(min):
-	print "waiting to start in ..." + str(min)
 	while min i >= 0:
+		print "waiting to start in ..." + str(min)
 		time.sleep(60)
 		min -=1 
 
 # anova = AnovaController(ANOVA_MAC_ADDRESS)
+
+def set_sous_vide(target_temp, cook_timer):
+
 
 @app.route('/')
 def index():
