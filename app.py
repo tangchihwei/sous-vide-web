@@ -40,11 +40,11 @@ def delay_min(min):
 		time.sleep(60)
 		min -=1 
 
-# anova = AnovaController(ANOVA_MAC_ADDRESS)
+anova = AnovaController(ANOVA_MAC_ADDRESS)
 
-def set_sous_vide(target_temp, cook_timer):
-    print "set target temp"
-    print "cook time"
+# def set_sous_vide(target_temp, cook_timer):
+#     print "set target temp"
+#     print "cook time"
 
 @app.route('/')
 def index():
@@ -59,21 +59,31 @@ def control():
     #TODO: all the settings
     cook_temp = request.form['target_temp']
     cook_time = request.form['set_time_hr'] * 60 + request.form['set_time_min']
+    anova.set_temp(cook_temp)
+	anova.set_timer(cook_time)
     ready_time = request.form['ready_time']
     time_to_preheat = get_time_diff(get_time(), ready_time) - cook_time - ANOVA_PRE_HEAT_TIME
-    
-    delay_min(time_to_preheat)
+    if time_to_preheat < 0:
+    	time_to_preheat = 0
+    	anova.start_anova()
+    	# update ready time
+    else:
+    	delay_min(time_to_preheat)
+    	anova.start_anova()
 
-    print "mins to start: " + str(get_time_diff(get_time(), request.form['ready_time']) - ANOVA_PRE_HEAT_TIME)
+    while not float_compare(float(anova.read_temp()), cook_temp):
+        print "target_temp: "+ str(target_temp)
+        print "current temp: "+ anova.read_temp()
+        time.sleep(1)
+
+    print "start the timer now"
+    anova.start_timer()
+    # print "mins to start: " + str(get_time_diff(get_time(), request.form['ready_time']) - ANOVA_PRE_HEAT_TIME)
     return render_template('form.html')
-    ###TODO:
-    #1. check whether it's too late to start scheduling. too late if ready_time-current_time-preheat_time - set_time <0. start immediately. 
-    #2. else 
-
-    #
     
 
 if __name__== '__main__':
     app.run(host='0.0.0.0', use_reloader=True, debug = True)
+
 
 
