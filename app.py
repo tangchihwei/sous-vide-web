@@ -2,6 +2,7 @@ from flask import Flask, request, render_template
 from pycirculate.anova import AnovaController
 import time
 import os
+import logging
 
 app = Flask(__name__)
 
