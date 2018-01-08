@@ -41,12 +41,6 @@ def delay_min(min):
 		time.sleep(60)
 		min -=1 
 
-# anova = AnovaController(ANOVA_MAC_ADDRESS)
-
-# def set_sous_vide(target_temp, cook_timer):
-#     print "set target temp"
-#     print "cook time"
-
 @app.route('/')
 def index():
     return render_template('form.html')
@@ -58,20 +52,22 @@ def submit():
 @app.route('/test')
 def test():
     print "in test"
-    print "temp in test: "+ str(app.anova_controller.read_temp())
+    print "temp in test: "+ str(app.anova.read_temp())
+    app.anova.set_temp(65)
+    app.anova.start_anova
 
 @app.route('/control', methods=['POST'])
 def control():
     #TODO: all the settings
     cook_temp = request.form['target_temp']
     cook_time = request.form['set_time_hr'] * 60 + request.form['set_time_min']
-    # anova.set_temp(cook_temp)
-    # anova.set_timer(cook_time)
+     app.anova.set_temp(cook_temp)
+     app.anova.set_timer(cook_time)
     ready_time = request.form['ready_time']
     time_to_preheat = get_time_diff(get_time(), ready_time) - cook_time - ANOVA_PRE_HEAT_TIME
     if time_to_preheat < 0:
     	time_to_preheat = 0
-    	# anova.start_anova()
+    	app.anova.start_anova()
     	# update ready time
     else:
     	delay_min(time_to_preheat)
@@ -82,35 +78,13 @@ def control():
         print "current temp: "+ anova.read_temp()
         time.sleep(1)
 
-    print "start the timer now"
+    print "start the timer now, start cooking"
     anova.start_timer()
-    # print "mins to start: " + str(get_time_diff(get_time(), request.form['ready_time']) - ANOVA_PRE_HEAT_TIME)
     return render_template('form.html')
-    
-
-# if __name__== '__main__':
-#     app.run(host='0.0.0.0', use_reloader=True, debug = True)
-
 
 def main():
-    # Setup logging
-#    logging.basicConfig(level=logging.INFO)
- #   handler = logging.StreamHandler(sys.stdout)
-  #  handler.setLevel(logging.INFO)
-  #  formatter = logging.Formatter('%(asctime)s - %(name)s - %(levelname)s - %(message)s')
-   # handler.setFormatter(formatter)
-   # app.logger.addHandler(handler)
-
-    app.anova_controller = AnovaController(ANOVA_MAC_ADDRESS)
-    print "temp: " + str(app.anova_controller.read_temp())
-
-    # try:
-    #     username = os.environ["PYCIRCULATE_USERNAME"]
-    #     password = os.environ["PYCIRCULATE_PASSWORD"]
-    #     app.wsgi_app = AuthMiddleware(app.wsgi_app, username, password)
-    # except KeyError:
-    #     warnings.warn("Enable HTTP Basic Authentication by setting the 'PYCIRCULATE_USERNAME' and 'PYCIRCULATE_PASSWORD' environment variables.")
-
+    app.anova = AnovaController(ANOVA_MAC_ADDRESS)
+    print "temp: " + str(app.anova.read_temp())
     app.run(host='0.0.0.0', port=5000)
 
 if __name__ == '__main__':
