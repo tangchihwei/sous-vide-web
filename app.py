@@ -96,7 +96,7 @@ def main():
     handler.setFormatter(formatter)
     app.logger.addHandler(handler)
 
-    app.anova_controller = AnovaController(ANOVA_MAC_ADDRESS, logger=app.logger)
+    app.anova_controller = AnovaController(ANOVA_MAC_ADDRESS)
     print "temp: " + str(app.anova_controller.read_temp())
 
     # try:
@@ -106,7 +106,7 @@ def main():
     # except KeyError:
     #     warnings.warn("Enable HTTP Basic Authentication by setting the 'PYCIRCULATE_USERNAME' and 'PYCIRCULATE_PASSWORD' environment variables.")
 
-    app.run(host='0.0.0.0', port=5000, use_reloader=True, debug = True)
+    app.run(host='0.0.0.0', port=5000)
 
 if __name__ == '__main__':
     main()
