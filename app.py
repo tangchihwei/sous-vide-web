@@ -26,7 +26,9 @@ def get_time_diff(now, ready_time):
 	print "current time: " + str(current_time[3]) + " : " + str(current_time[4])
 	print "ready time parsed: " + str(dinner_time[3]) + " : " + str(dinner_time[4])
 	if int(dinner_time[3])-int(current_time[3]) > 0:
-		return 60*(int(dinner_time[3]) - int(current_time[3])) + (int(dinner_time[4])-int(current_time[4]))
+        print "dinner time scheduled"
+        val = 60*(int(dinner_time[3]) - int(current_time[3])) + (int(dinner_time[4])-int(current_time[4]))
+		return val
 	else:
 		return -1
 		# TODO: check to see whether ready time is for next day
@@ -82,9 +84,9 @@ def control():
     	delay_min(time_to_preheat)
     	# anova.start_anova()
 
-    while not float_compare(float(anova.read_temp()), cook_temp):
+    while not float_compare(float(app.anova.read_temp()), cook_temp):
         print "target_temp: "+ str(target_temp)
-        print "current temp: "+ anova.read_temp()
+        print "current temp: "+ app.anova.read_temp()
         time.sleep(1)
 
     print "start the timer now, start cooking"
