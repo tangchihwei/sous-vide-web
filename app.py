@@ -65,6 +65,7 @@ def control():
     app.anova.set_timer(cook_time)
     ready_time = request.form['ready_time']
     time_to_preheat = get_time_diff(get_time(), ready_time) - cook_time - ANOVA_PRE_HEAT_TIME
+    print "time to preheat: " + str(time_to_preheat)
     if time_to_preheat < 0:
     	time_to_preheat = 0
     	app.anova.start_anova()
