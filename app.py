@@ -23,14 +23,7 @@ def get_time():
 def get_time_diff(now, ready_time):
 	current_time=time.strptime(now,"%I:%M %p")
 	dinner_time = time.strptime(ready_time,"%H:%M")
-	print "current time: " + str(current_time[3]) + " : " + str(current_time[4])
-	print "ready time parsed: " + str(dinner_time[3]) + " : " + str(dinner_time[4])
 	if int(dinner_time[3])-int(current_time[3]) > 0:
-            print "dinner time scheduled"
-            hr_min = 60*(int(dinner_time[3]) - int(current_time[3]))
-            print "hr_min: "+str(hr_min)
-            dinner_min = int(dinner_time[4])-int(current_time[4])
-            print "dinner_min: "+str(dinner_min)
             val = 60*(int(dinner_time[3]) - int(current_time[3])) + (int(dinner_time[4])-int(current_time[4]))
             return val
 	else:
@@ -66,20 +59,12 @@ def test():
 @app.route('/control', methods=['POST'])
 def control():
     #TODO: all the settings
-    print "in control"
     cook_temp = float(request.form['target_temp'])
-    print "set time hr(min): " + str(int(request.form['set_time_hr'])*60)
-    print "set time min: " + request.form['set_time_min']
     cook_time = int(request.form['set_time_hr']) * 60 + int(request.form['set_time_min'])
-    print "cook time: "+str(cook_time)
     app.anova.set_temp(cook_temp)
-    print "after set temp"
     app.anova.set_timer(int(cook_time))
-    print "after set timer"
     ready_time = request.form['ready_time']
-    print "cal time_to_preheat"
     time_to_preheat = get_time_diff(get_time(), ready_time) - cook_time - ANOVA_PRE_HEAT_TIME
-    print "time to preheat: " + str(time_to_preheat)
     if time_to_preheat < 0:
     	time_to_preheat = 0
         print "start anova now!!!"
