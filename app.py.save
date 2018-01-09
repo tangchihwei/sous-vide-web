@@ -27,10 +27,8 @@ def get_time_diff(now, ready_time):
 	print "ready time parsed: " + str(dinner_time[3]) + " : " + str(dinner_time[4])
 	if int(dinner_time[3])-int(current_time[3]) > 0:
             print "dinner time scheduled"
-            hr_min = 60*(int(dinner_time[3]) - int(current_time[3]))
-            print "hr_min: "+str(hr_min)
+            dinner_min = 60*(int(dinner_time[3]) - int(current_time[3])
             dinner_min = int(dinner_time[4])-int(current_time[4])
-            print "dinner_min: "+str(dinner_min)
             val = 60*(int(dinner_time[3]) - int(current_time[3])) + (int(dinner_time[4])-int(current_time[4]))
             return val
 	else:
