@@ -8,8 +8,14 @@ value="cooking temperature in C">
     
   </div>
   <div>
-    <label for="set_time">Cooking Time</label>
-    <input id="set_time" type="time" name="set_time">
+    <label for="set_time_hr">Cooking Time</label>
+    <input id="set_time_hr" name="set_time_hr" size="5" onblur="this.value = this.value || this.defaultValue; this.style.color = '#999';"
+onfocus="this.value=''; this.style.color = '#000';"
+value="hours">
+    <label for="set_time_min">:</label>
+    <input id="set_time_min" name="set_time_min" size="5" onblur="this.value = this.value || this.defaultValue; this.style.color = '#999';"
+onfocus="this.value=''; this.style.color = '#000';"
+value="min">
   </div>
     <div>
      <label for="ready_time">When would you like it ready? : </label>
