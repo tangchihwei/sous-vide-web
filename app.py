@@ -67,7 +67,7 @@ def test():
 def control():
     #TODO: all the settings
     print "in control"
-    cook_temp = request.form['target_temp']
+    cook_temp = float(request.form['target_temp'])
     print "set time hr(min): " + str(int(request.form['set_time_hr'])*60)
     print "set time min: " + request.form['set_time_min']
     cook_time = int(request.form['set_time_hr']) * 60 + int(request.form['set_time_min'])
@@ -83,19 +83,19 @@ def control():
     if time_to_preheat < 0:
     	time_to_preheat = 0
         print "start anova now!!!"
- #   	app.anova.start_anova()
+    	app.anova.start_anova()
     	# update ready time
     else:
     	delay_min(time_to_preheat)
-    	# anova.start_anova()
+    	app.anova.start_anova()
 
     while not float_compare(float(app.anova.read_temp()), cook_temp):
-        print "target_temp: "+ str(target_temp)
-        print "current temp: "+ app.anova.read_temp()
+        print "target_temp: "+ str(cook_temp)
+        print "current temp: "+ str(app.anova.read_temp())
         time.sleep(1)
 
     print "start the timer now, start cooking"
-    anova.start_timer()
+    app.anova.start_timer()
     return render_template('form.html')
 
 def main():
