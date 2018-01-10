@@ -36,7 +36,7 @@ def float_compare(a, b):
 
 def delay_min(min):
 	while min > 0:
-		print str(get_time()) + " -- waiting to start in ..." + str(min)
+		print str(get_time()) + " -- waiting to start in ..." + str(min) + " min"
 		time.sleep(60)
 		min -=1 
         
@@ -64,7 +64,7 @@ def control():
     app.anova.set_temp(cook_temp)
     app.anova.set_timer(int(cook_time))
     ready_time = request.form['ready_time']
-    print str(get_time()) + " -- Order Received: Cooking Temperature = " + str(cook_temp) + "Cooking Time = " + str(cook_time) + "Ready Time = " + str(ready_time) 
+    print str(get_time()) + " -- Order Received: Cooking Temperature = " + str(cook_temp) + "C, Cooking Time = " + str(cook_time) + " min, Ready Time = " + str(ready_time) 
     time_to_preheat = get_time_diff(get_time(), ready_time) - cook_time - ANOVA_PRE_HEAT_TIME
     if time_to_preheat < 0:
     	time_to_preheat = 0
@@ -76,7 +76,7 @@ def control():
     	app.anova.start_anova()
 
     while not float_compare(float(app.anova.read_temp()), cook_temp):
-        print str(get_time()) + " --  target_temp: "+ str(cook_temp) + " | " + "current temp: "+ str(app.anova.read_temp())
+        print str(get_time()) + " --  target_temp: "+ str(cook_temp) + "C | " + "current temp: "+ str(app.anova.read_temp()) + "C"
         time.sleep(5)
 
     print str(get_time()) + " -- start the timer now, start cooking"
@@ -85,7 +85,7 @@ def control():
     # print "read timer: " + str(app.anova.read_timer())
     while (app.anova.read_timer().split()[1]) == "running":
         print str(get_time()) + " -- Almost done.." + str(app.anova.read_timer().split()[0]) + " minutes to go"
-        time.sleep(5)
+        time.sleep(60)
     app.anova.stop_timer()
     app.anova.stop_anova()
     print str(get_time()) + " -- Food is Ready!, Original Ready Time = " + str(ready_time)
