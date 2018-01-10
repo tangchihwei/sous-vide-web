@@ -64,6 +64,7 @@ def control():
     app.anova.set_temp(cook_temp)
     app.anova.set_timer(int(cook_time))
     ready_time = request.form['ready_time']
+    print str(get_time()) + " -- Order Received: Cooking Temperature = " + str(cook_temp) + "Cooking Time = " + str(cook_time) + "Ready Time = " + str(ready_time) 
     time_to_preheat = get_time_diff(get_time(), ready_time) - cook_time - ANOVA_PRE_HEAT_TIME
     if time_to_preheat < 0:
     	time_to_preheat = 0
@@ -87,6 +88,7 @@ def control():
         time.sleep(5)
     app.anova.stop_timer()
     app.anova.stop_anova()
+    print str(get_time()) + " -- Food is Ready!, Original Ready Time = " + str(ready_time)
 
 def main():
     app.anova = AnovaController(ANOVA_MAC_ADDRESS)
