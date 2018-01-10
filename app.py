@@ -81,7 +81,6 @@ def control():
 
     print str(get_time()) + " -- start the timer now, start cooking"
     app.anova.start_timer()
-    render_template('form.html')
     # print "read timer: " + str(app.anova.read_timer())
     while (app.anova.read_timer().split()[1]) == "running":
         print str(get_time()) + " -- Almost done.." + str(app.anova.read_timer().split()[0]) + " minutes to go"
@@ -89,6 +88,7 @@ def control():
     app.anova.stop_timer()
     app.anova.stop_anova()
     print str(get_time()) + " -- Food is Ready!, Original Ready Time = " + str(ready_time)
+    return render_template('form.html')
 
 def main():
     app.anova = AnovaController(ANOVA_MAC_ADDRESS)
