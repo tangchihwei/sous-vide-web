@@ -36,7 +36,7 @@ def float_compare(a, b):
 
 def delay_min(min):
 	while min > 0:
-		print "waiting to start in ..." + str(min)
+		print str(get_time()) + " -- waiting to start in ..." + str(min)
 		time.sleep(60)
 		min -=1 
         
@@ -78,7 +78,7 @@ def control():
         print str(get_time()) + " --  target_temp: "+ str(cook_temp) + " | " + "current temp: "+ str(app.anova.read_temp())
         time.sleep(5)
 
-    print "start the timer now, start cooking"
+    print str(get_time()) + " -- start the timer now, start cooking"
     app.anova.start_timer()
     render_template('form.html')
     # print "read timer: " + str(app.anova.read_timer())
@@ -90,7 +90,7 @@ def control():
 
 def main():
     app.anova = AnovaController(ANOVA_MAC_ADDRESS)
-    print "temp: " + str(app.anova.read_temp())
+    print str(get_time()) + " -- temp: " + str(app.anova.read_temp())
     app.run(host='0.0.0.0', port=5000)
 
 if __name__ == '__main__':
