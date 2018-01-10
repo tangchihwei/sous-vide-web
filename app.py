@@ -81,6 +81,7 @@ def control():
 
     print "start the timer now, start cooking"
     app.anova.start_timer()
+    print "read timer: " + str(app.anova.read_timer())
     return render_template('form.html')
 
 def main():
