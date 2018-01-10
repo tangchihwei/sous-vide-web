@@ -67,7 +67,7 @@ def control():
     time_to_preheat = get_time_diff(get_time(), ready_time) - cook_time - ANOVA_PRE_HEAT_TIME
     if time_to_preheat < 0:
     	time_to_preheat = 0
-        print "start anova now!!!"
+        print str(get_time()) + " -- start anova now!!!"
     	app.anova.start_anova()
     	# update ready time
     else:
@@ -75,16 +75,16 @@ def control():
     	app.anova.start_anova()
 
     while not float_compare(float(app.anova.read_temp()), cook_temp):
-        print "target_temp: "+ str(cook_temp)
-        print "current temp: "+ str(app.anova.read_temp())
-        time.sleep(1)
+        print str(get_time()) + " --  target_temp: "+ str(cook_temp) + " | " + "current temp: "+ str(app.anova.read_temp())
+        time.sleep(5)
 
     print "start the timer now, start cooking"
     app.anova.start_timer()
     render_template('form.html')
     # print "read timer: " + str(app.anova.read_timer())
     while (app.anova.read_timer().split()[1]) == "running":
-        print "Almost done.." + str(app.anova.read_timer().split()[0]) + " minutes to go"
+        print str(get_time()) + " -- Almost done.." + str(app.anova.read_timer().split()[0]) + " minutes to go"
+        time.sleep(5)
     app.anova.stop_timer()
     app.anova.stop_anova()
 
