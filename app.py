@@ -39,8 +39,7 @@ def delay_min(min):
 		print "waiting to start in ..." + str(min)
 		time.sleep(60)
 		min -=1 
-def parse_read_timer(timer)g
-
+        
 @app.route('/')
 def index():
     return render_template('form.html')
