@@ -39,6 +39,7 @@ def delay_min(min):
 		print "waiting to start in ..." + str(min)
 		time.sleep(60)
 		min -=1 
+def parse_read_timer(timer)g
 
 @app.route('/')
 def index():
@@ -81,8 +82,12 @@ def control():
 
     print "start the timer now, start cooking"
     app.anova.start_timer()
-    print "read timer: " + str(app.anova.read_timer())
-    return render_template('form.html')
+    render_template('form.html')
+    # print "read timer: " + str(app.anova.read_timer())
+    while (app.anova.read_timer().split()[1]) == "running":
+        print "Almost done.." + str(app.anova.read_timer().split()[0]) + " minutes to go"
+    app.anova.stop_timer()
+    app.anova.stop()
 
 def main():
     app.anova = AnovaController(ANOVA_MAC_ADDRESS)
