@@ -86,7 +86,7 @@ def control():
     while (app.anova.read_timer().split()[1]) == "running":
         print "Almost done.." + str(app.anova.read_timer().split()[0]) + " minutes to go"
     app.anova.stop_timer()
-    app.anova.stop()
+    app.anova.stop_anova()
 
 def main():
     app.anova = AnovaController(ANOVA_MAC_ADDRESS)
