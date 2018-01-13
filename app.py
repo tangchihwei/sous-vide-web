@@ -70,35 +70,44 @@ def control():
     #TODO: all the settings
     cook_temp = float(request.form['target_temp'])
     cook_time = int(request.form['set_time_hr']) * 60 + int(request.form['set_time_min'])
-    
-
-    app.anova.set_temp(cook_temp)
-    app.anova.set_timer(int(cook_time))
     ready_time = request.form['ready_time']
-    print str(get_time()) + " -- Order Received: Cooking Temperature = " + str(cook_temp) + "C, Cooking Time = " + str(cook_time) + " min, Ready Time = " + str(ready_time) 
-    time_to_preheat = get_time_diff(get_time(), ready_time) - cook_time - ANOVA_PRE_HEAT_TIME
-    if time_to_preheat < 0:
-    	time_to_preheat = 0
-        print str(get_time()) + " -- start anova now!!!"
-    	app.anova.start_anova()
-    	# update ready time
-    else:
-    	delay_min(time_to_preheat)
-    	app.anova.start_anova()
 
-    while not float_compare(float(app.anova.read_temp()), cook_temp):
-        print str(get_time()) + " --  target_temp: "+ str(cook_temp) + "C | " + "current temp: "+ str(app.anova.read_temp()) + "C"
-        time.sleep(5)
+    message = message_gen(
+        "TASK_ANOVA", str(get_time()), "COOK_ORDER", {
+            "cook_temp" : cook_temp,
+            "cook_time" : cook_time,
+            "ready_time" : ready_time
+        }
+        )
 
-    print str(get_time()) + " -- start the timer now, start cooking"
-    app.anova.start_timer()
-    # print "read timer: " + str(app.anova.read_timer())
-    while (app.anova.read_timer().split()[1]) == "running":
-        print str(get_time()) + " -- Almost done.." + str(app.anova.read_timer().split()[0]) + " minutes to go"
-        time.sleep(60)
-    app.anova.stop_timer()
-    app.anova.stop_anova()
-    print str(get_time()) + " -- Food is Ready!, Original Ready Time = " + str(ready_time)
+    app.messages.append(message)
+
+    # app.anova.set_temp(cook_temp)
+    # app.anova.set_timer(int(cook_time))
+    # print str(get_time()) + " -- Order Received: Cooking Temperature = " + str(cook_temp) + "C, Cooking Time = " + str(cook_time) + " min, Ready Time = " + str(ready_time) 
+    # time_to_preheat = get_time_diff(get_time(), ready_time) - cook_time - ANOVA_PRE_HEAT_TIME
+    # if time_to_preheat < 0:
+    # 	time_to_preheat = 0
+    #     print str(get_time()) + " -- start anova now!!!"
+    # 	app.anova.start_anova()
+    # 	# update ready time
+    # else:
+    # 	delay_min(time_to_preheat)
+    # 	app.anova.start_anova()
+
+    # while not float_compare(float(app.anova.read_temp()), cook_temp):
+    #     print str(get_time()) + " --  target_temp: "+ str(cook_temp) + "C | " + "current temp: "+ str(app.anova.read_temp()) + "C"
+    #     time.sleep(5)
+
+    # print str(get_time()) + " -- start the timer now, start cooking"
+    # app.anova.start_timer()
+    # # print "read timer: " + str(app.anova.read_timer())
+    # while (app.anova.read_timer().split()[1]) == "running":
+    #     print str(get_time()) + " -- Almost done.." + str(app.anova.read_timer().split()[0]) + " minutes to go"
+    #     time.sleep(60)
+    # app.anova.stop_timer()
+    # app.anova.stop_anova()
+    # print str(get_time()) + " -- Food is Ready!, Original Ready Time = " + str(ready_time)
     return render_template('form.html')
 #this task 
 def task_scheduler(messages):
@@ -121,8 +130,8 @@ def task_anova(messages):
         for message in messages:
             if message["key"] == "TASK_ANOVA":
                 if message["event"] == "COOK_ORDER":
-                    anova.set_timer(message["payload"]["set_time"])
-                    anova.set_temp(message["payload"]["target_temp"])
+                    anova.set_timer(message["payload"]["cook_time"])
+                    anova.set_temp(message["payload"]["cook_temp"])
         time.sleep(0.5) #2Hz message queue
 
 def main():
