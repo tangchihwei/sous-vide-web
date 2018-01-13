@@ -132,16 +132,16 @@ def task_scheduler(messages):
     #send out 
 
     preheat_start_time = time.strptime("0:0","%H:%M")
-    start_cook_time = time.strptime("0:0", "%H:%M")
+    # start_cook_time = time.strptime("0:0", "%H:%M")
     ready_time = time.strptime("0:0","%H:%M")
     while True:
+        if get_time_diff(get_time(), ) 
         for i, message in enumerate(messages):
             if message["target"] = "TASK_SCHEDULER":
                 if message["event"] == "ANOVA_ORDER": #new order received
-                    preheat_est(message["payload"]["cook_temp"])
+                   
                     ready_time = time.strptime((message["payload"]["ready_time"]),"%H:%M") #parse ready time in 24hr
-
-                    get_time_diff(get_time(), message["payload"]["ready_time"])
+                    preheat_start_time = update_time(ready_time, message["payload"]["cook_time"] + preheat_est(message["payload"]["cook_temp"])) #preheat start = ready time - cook time - preheat time
                 elif message["event"] == "SCHEDULER_PREHEAT_EST":
 
                 messages.pop(i)
