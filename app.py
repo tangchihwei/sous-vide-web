@@ -3,6 +3,7 @@ from pycirculate.anova import AnovaController
 import time
 import os
 import logging, sys, datetime
+import multiprocessing
 
 app = Flask(__name__)
 
@@ -90,10 +91,36 @@ def control():
     print str(get_time()) + " -- Food is Ready!, Original Ready Time = " + str(ready_time)
     return render_template('form.html')
 
+def task_flask(messages):
+    app.messages = messages
+    app.run(host = '0.0.0.0', port = 5000, use_reloader = False)
+
+def task_anova(messages):
+    anova = AnovaController(ANOVA_MAC_ADDRESS)
+
+    while True:
+        for message in messages:
+            if message["key"] == "TASK_ANOVA":
+                if message["event"] == "COOK_ORDER":
+                    anova.set_timer(message["payload"]["set_time"])
+                    anova.set_temp(message["payload"]["target_temp"])
+        time.sleep(0.5) #2Hz message queue
+
 def main():
-    app.anova = AnovaController(ANOVA_MAC_ADDRESS)
-    print str(get_time()) + " -- temp: " + str(app.anova.read_temp())
-    app.run(host='0.0.0.0', port=5000)
+
+    manager = multiprocessing.Manager()
+    messages = manager.list()
+    process_flask = multiprocessing.Process(
+        target = task_flask,
+        args = (messages,))
+    process_anova = multiprocessing.Process(
+        target = task_anova,
+        args = (messages,))
+    process_flask.start()
+    process_anova.start()
+    process_flask.join()
+    process_anova.join()
+
 
 if __name__ == '__main__':
     main()
