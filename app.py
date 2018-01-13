@@ -49,6 +49,8 @@ def message_gen(target, timestamp, event, payload):
         "payload" : payload
     }
     return message
+def preheat_est(temp):
+    return ANOVA_PRE_HEAT_TIME
         
 @app.route('/')
 def index():
@@ -82,8 +84,9 @@ def control():
 
     app.messages.append(message)
     message["target"] = "TASK_SCHEDULER"
+    # message["event"] = "SCHEDULER_READY_TIME"
     app.messages.append(message)
-    
+
     # app.anova.set_temp(cook_temp)
     # app.anova.set_timer(int(cook_time))
     # print str(get_time()) + " -- Order Received: Cooking Temperature = " + str(cook_temp) + "C, Cooking Time = " + str(cook_time) + " min, Ready Time = " + str(ready_time) 
@@ -115,9 +118,18 @@ def control():
 def task_scheduler(messages):
     #ready_time
     #send out 
+
+    preheat_time = time.strptime("0:0","%H:%M")
+    ready_time = time.strptime("0:0","%H:%M")
     while True:
-        for message in messages:
+        for i, message in enumerate(messages):
             if message["target"] = "TASK_SCHEDULER":
+                if message["event"] == "ANOVA_ORDER": #new order received
+                    preheat_est(message.)
+                elif message["event"] == "SCHEDULER_PREHEAT_EST":
+
+                messages.pop(i)
+
                 
 
         time.sleep(0.2) #5 Hz
@@ -143,12 +155,12 @@ def task_anova(messages):
                 if device_status == "preheating"
                 message_gen("TASK_SCHEDULER", )
                 #parse message
-                for message in messages:
+                for i, message in enumerate(messages):
                     if message["target"] == "TASK_ANOVA":
-                        if message["event"] == "ANOVA_ORDER":
-                            preheat_time = ANOVA_PRE_HEAT_TIME #TODO: check temp diff for estimate
-                            messages.append(message_gen("TASK_SCHEDULER", str(get_time()), "SCHEDULER_PREHEAT_EST", preheat_time))
-                        elif message["event"] == "ANOVA_PREHEAT":
+                        # if message["event"] == "ANOVA_ORDER":
+                        #     preheat_time = ANOVA_PRE_HEAT_TIME #TODO: check temp diff for estimate
+                        #     messages.append(message_gen("TASK_SCHEDULER", str(get_time()), "SCHEDULER_PREHEAT_EST", preheat_time))
+                        if message["event"] == "ANOVA_PREHEAT":
                             # anova.set_timer(message["payload"]["cook_time"])
                             anova.set_temp(message["payload"]["cook_temp"])
                             anova.start_anova()
@@ -156,6 +168,9 @@ def task_anova(messages):
                         elif message["event"] == "ANOVA_COOK":
                             anova.set_timer(message["payload"]["cook_time"])
                             anova.start_timer()
+                        else :
+                            print "other event: " + message["event"]
+                        messages.pop(i)
         time.sleep(0.5) #2 Hz message queue
 
 def main():
@@ -175,4 +190,3 @@ def main():
 
 if __name__ == '__main__':
     main()
-
