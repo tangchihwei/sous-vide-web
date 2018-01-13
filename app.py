@@ -40,6 +40,15 @@ def delay_min(min):
 		print str(get_time()) + " -- waiting to start in ..." + str(min) + " min"
 		time.sleep(60)
 		min -=1 
+
+def message_gen(key, timestamp, event, payload):
+    message = {
+        "key" : key,
+        "timestamp" : timestamp,
+        "event" : event,
+        "payload" : payload
+    }
+    return message
         
 @app.route('/')
 def index():
@@ -55,13 +64,14 @@ def test():
     print "temp in test: "+ str(app.anova.read_temp())
     app.anova.set_temp(65)
     app.anova.set_timer(60)
-#    app.anova.start_anova()
 
 @app.route('/control', methods=['POST'])
 def control():
     #TODO: all the settings
     cook_temp = float(request.form['target_temp'])
     cook_time = int(request.form['set_time_hr']) * 60 + int(request.form['set_time_min'])
+    
+
     app.anova.set_temp(cook_temp)
     app.anova.set_timer(int(cook_time))
     ready_time = request.form['ready_time']
@@ -90,6 +100,15 @@ def control():
     app.anova.stop_anova()
     print str(get_time()) + " -- Food is Ready!, Original Ready Time = " + str(ready_time)
     return render_template('form.html')
+#this task 
+def task_scheduler(messages):
+    #ready_time
+    #
+    while True:
+        for message in messages:
+            if message["key"] = "TASK_TIMER":
+
+
 
 def task_flask(messages):
     app.messages = messages
