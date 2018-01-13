@@ -116,6 +116,7 @@ def task_scheduler(messages):
     while True:
         for message in messages:
             if message["key"] = "TASK_TIMER":
+                print " task"
 
 
 
@@ -148,7 +149,6 @@ def main():
     process_anova.start()
     process_flask.join()
     process_anova.join()
-
 
 if __name__ == '__main__':
     main()
