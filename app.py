@@ -41,9 +41,9 @@ def delay_min(min):
 		time.sleep(60)
 		min -=1 
 
-def message_gen(key, timestamp, event, payload):
+def message_gen(target, timestamp, event, payload):
     message = {
-        "key" : key,
+        "target" : target,
         "timestamp" : timestamp,
         "event" : event,
         "payload" : payload
@@ -112,10 +112,10 @@ def control():
 #this task 
 def task_scheduler(messages):
     #ready_time
-    #
+    #send out 
     while True:
         for message in messages:
-            if message["key"] = "TASK_TIMER":
+            if message["target"] = "TASK_TIMER":
                 print " task"
 
 
@@ -126,13 +126,26 @@ def task_flask(messages):
 
 def task_anova(messages):
     anova = AnovaController(ANOVA_MAC_ADDRESS)
-
+    device_status = anova.anova_status() #'running', 'stopped', 'low water', 'heater error'
+    
+    #check connection, check system status
     while True:
-        for message in messages:
-            if message["key"] == "TASK_ANOVA":
-                if message["event"] == "COOK_ORDER":
-                    anova.set_timer(message["payload"]["cook_time"])
-                    anova.set_temp(message["payload"]["cook_temp"])
+        if not anova.is_connected :
+            anova.connect()
+        else:
+            if not device_status == anova.anova_status():
+                print anova.anova_status() #status change, something wrong?
+            else: 
+                for message in messages:
+                    if message["target"] == "TASK_ANOVA":
+                        if message["event"] == "ANOVA_PREHEAT":
+                            # anova.set_timer(message["payload"]["cook_time"])
+                            anova.set_temp(message["payload"]["cook_temp"])
+                            anova.start_anova()
+                            device_status = "running" #need to validate
+                        elif message["event"] == "ANOVA_COOK":
+                            anova.set_timer(message["payload"]["cook_time"])
+                            anova.start_timer()
         time.sleep(0.5) #2Hz message queue
 
 def main():
