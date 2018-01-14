@@ -26,12 +26,14 @@ def get_time_diff(now, ready_time):
         print str(current_time[3]) + " : " + str(current_time[4])
 	dinner_time = time.strptime(ready_time,"%H:%M")
         print str(dinner_time[3]) + " : " + str(dinner_time[4])
+
 	if int(dinner_time[3])-int(current_time[3]) >= 0:
-            val = 60*(int(dinner_time[3]) - int(current_time[3])) + (int(dinner_time[4])-int(current_time[4]))
-            return val
-	elif :
-		return  
-		# TODO: check to see whether ready time is for next day
+        val_hr = int(dinner_time[3]) - int(current_time[3])
+        val_min = int(dinner_time[4])-int(current_time[4])
+	else: #next day
+        val_hr = int(dinner_time[3]) + 24 - int(current_time[3])
+        val_min = int(dinner_time[4]) - int(current_time[4])
+	return 60 * val_hr + val_min
 
 def float_compare(a, b):
         threshold = 0.05
@@ -97,38 +99,7 @@ def control():
             "cook_time" : cook_time,
             "ready_time" : ready_time
         })
-
-    # app.messages.append(message)
-    # message["target"] = "TASK_SCHEDULER"
-    # message["event"] = "SCHEDULER_READY_TIME"
     app.messages.append(message)
-
-    # app.anova.set_temp(cook_temp)
-    # app.anova.set_timer(int(cook_time))
-    # print str(get_time()) + " -- Order Received: Cooking Temperature = " + str(cook_temp) + "C, Cooking Time = " + str(cook_time) + " min, Ready Time = " + str(ready_time) 
-    # time_to_preheat = get_time_diff(get_time(), ready_time) - cook_time - ANOVA_PRE_HEAT_TIME
-    # if time_to_preheat < 0:
-    # 	time_to_preheat = 0
-    #     print str(get_time()) + " -- start anova now!!!"
-    # 	app.anova.start_anova()
-    # 	# update ready time
-    # else:
-    # 	delay_min(time_to_preheat)
-    # 	app.anova.start_anova()
-
-    # while not float_compare(float(app.anova.read_temp()), cook_temp):
-    #     print str(get_time()) + " --  target_temp: "+ str(cook_temp) + "C | " + "current temp: "+ str(app.anova.read_temp()) + "C"
-    #     time.sleep(5)
-
-    # print str(get_time()) + " -- start the timer now, start cooking"
-    # app.anova.start_timer()
-    # # print "read timer: " + str(app.anova.read_timer())
-    # while (app.anova.read_timer().split()[1]) == "running":
-    #     print str(get_time()) + " -- Almost done.." + str(app.anova.read_timer().split()[0]) + " minutes to go"
-    #     time.sleep(60)
-    # app.anova.stop_timer()
-    # app.anova.stop_anova()
-    # print str(get_time()) + " -- Food is Ready!, Original Ready Time = " + str(ready_time)
     return render_template('form.html')
 def task_timer(messages, timer_name, min):
     timer_time = min
