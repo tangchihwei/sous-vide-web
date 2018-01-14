@@ -231,6 +231,7 @@ def task_anova(messages):
                         print "preheating completed"
                         packet = message_gen("TASK_SCHEDULER", str(get_time()), "SCHEDULER_PREHEAT_DONE", {})
                         messages.append(packet)
+                        device_status = "post preheat"
 
                 for i, message in enumerate(messages):
                     if message["target"] == "TASK_ANOVA":
@@ -248,6 +249,7 @@ def task_anova(messages):
                             print "start anova, machine not started"
                             device_status = "preheating" #need to validate
                         elif message["event"] == "ANOVA_COOK":
+                            print "start timer"
                             anova.start_timer()
                             device_status = "running"
                         else :
