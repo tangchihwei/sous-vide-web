@@ -23,8 +23,10 @@ def get_time():
 
 def get_time_diff(now, ready_time):
 	current_time=time.strptime(now,"%I:%M %p")
+        print str(current_time[3]) + " : " + str(current_time[4])
 	dinner_time = time.strptime(ready_time,"%H:%M")
-	if int(dinner_time[3])-int(current_time[3]) > 0:
+        print str(dinner_time[3]) + " : " + str(dinner_time[4])
+	if int(dinner_time[3])-int(current_time[3]) >= 0:
             val = 60*(int(dinner_time[3]) - int(current_time[3])) + (int(dinner_time[4])-int(current_time[4]))
             return val
 	else:
@@ -160,7 +162,9 @@ def task_scheduler(messages):
                     cook_temp = message["payload"]["cook_temp"]
                     # ready_time = time.strptime((message["payload"]["ready_time"]),"%H:%M") #parse ready time in 24hr
                     ready_time = message["payload"]["ready_time"]
+
                     temp_time = get_time_diff(get_time(), ready_time)
+                    print "temp get time diff: " + str(temp_time)
                     time_to_preheat = temp_time - preheat_est(cook_temp) - cook_time
                     print "time to preheat: " + str(time_to_preheat)
                     if time_to_preheat <= 0:
