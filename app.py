@@ -161,7 +161,7 @@ def task_scheduler(messages):
                     # ready_time = time.strptime((message["payload"]["ready_time"]),"%H:%M") #parse ready time in 24hr
                     ready_time = message["payload"]["ready_time"]
                     time_to_preheat = get_time_diff(get_time(), ready_time) - preheat_est(cook_temp) - cook_time
-                    print "time to preheat: " + time_to_preheat
+                    print "time to preheat: " + str(time_to_preheat)
                     if time_to_preheat <= 0:
                         print "start anova now"
                         packet = message_gen(
@@ -227,7 +227,7 @@ def task_anova(messages):
             else: 
                 if device_status == "preheating":
                     print "preheating"
-                    if float_compare(anova.read_temp() ,cook_temp):
+                    if float_compare(float(anova.read_temp()) ,cook_temp):
                         print "preheating completed"
                         packet = message_gen("TASK_SCHEDULER", str(get_time()), "SCHEDULER_PREHEAT_DONE", {})
                         messages.append(packet)
