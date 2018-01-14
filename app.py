@@ -81,7 +81,6 @@ def test():
 
 @app.route('/control', methods=['POST'])
 def control():
-    #TODO: all the settings
     cook_temp = float(request.form['target_temp'])
     cook_time = int(request.form['set_time_hr']) * 60 + int(request.form['set_time_min'])
     ready_time = request.form['ready_time']
@@ -126,6 +125,21 @@ def control():
     # app.anova.stop_anova()
     # print str(get_time()) + " -- Food is Ready!, Original Ready Time = " + str(ready_time)
     return render_template('form.html')
+def task_timer(messages, timer_name, min):
+    timer_time = min
+    while min > 0:
+        print str(get_time()) + " -- waiting ..." + str(min) + " min"
+        time.sleep(60)
+        min -=1  
+
+    message = message_gen(
+        "TASK_SCHEDULER", "str(get_time()), "SCHEDULER_TIME_UP", {
+                "timer_time" : timer_time,
+                "timer_name" : timer_name
+            }
+        )
+    messages.append(message)
+
 #this task 
 def task_scheduler(messages):
     #ready_time
@@ -139,10 +153,39 @@ def task_scheduler(messages):
         for i, message in enumerate(messages):
             if message["target"] = "TASK_SCHEDULER":
                 if message["event"] == "ANOVA_ORDER": #new order received
-                   
+                    cook_time = message["payload"]["cook_time"]
+                    cook_temp = message["payload"]["cook_temp"]
                     ready_time = time.strptime((message["payload"]["ready_time"]),"%H:%M") #parse ready time in 24hr
-                    preheat_start_time = update_time(ready_time, message["payload"]["cook_time"] + preheat_est(message["payload"]["cook_temp"])) #preheat start = ready time - cook time - preheat time
-                elif message["event"] == "SCHEDULER_PREHEAT_EST":
+                    time_to_preheat = get_time_diff(get_time(), ready_time) - preheat_est(cook_temp) - cook_time
+                    if time_to_preheat <= 0:
+                        print "start anova now"
+                        packet = message_gen(
+                            "TASK_ANOVA", str(get_time()), "ANOVA_PREHEAT",
+                            {
+                                "cook_temp" : cook_temp,
+                                "cook_time" : cook_time
+                            })
+                        messages.append(packet)
+                    else:
+                        process_timer = multiprocessing.Process(
+                            target = task_timer,
+                            args = ("TIMER_TO_PREHEAT", time_to_preheat ,)
+                        process_timer.start()
+
+                elif message["event"] == "SCHEDULER_TIME_UP":
+                    if message["payload"]["timer_name"] == "TIMER_TO_PREHEAT":
+                        packet = message_gen(
+                            "TASK_ANOVA", str(get_time()), "ANOVA_PREHEAT",
+                            {
+                                "cook_temp" : cook_temp,
+                                "cook_time" : cook_time
+                            })
+                        messages.append(packet)
+
+                elif message["event"] == "SCHEDULER_PREHEAT_DONE":
+                    #TODO:update final ready time
+                    #start                    
+
 
                 messages.pop(i)
 
