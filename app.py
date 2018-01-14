@@ -161,6 +161,7 @@ def task_scheduler(messages):
                     # ready_time = time.strptime((message["payload"]["ready_time"]),"%H:%M") #parse ready time in 24hr
                     ready_time = message["payload"]["ready_time"]
                     time_to_preheat = get_time_diff(get_time(), ready_time) - preheat_est(cook_temp) - cook_time
+                    print "time to preheat: " + time_to_preheat
                     if time_to_preheat <= 0:
                         print "start anova now"
                         packet = message_gen(
@@ -173,7 +174,7 @@ def task_scheduler(messages):
                     else:
                         process_timer = multiprocessing.Process(
                             target = task_timer,
-                            args = ("TIMER_TO_PREHEAT", time_to_preheat ,))
+                            args = (messages, "TIMER_TO_PREHEAT", time_to_preheat,))
                         process_timer.start()
 
                 elif message["event"] == "SCHEDULER_TIME_UP":
