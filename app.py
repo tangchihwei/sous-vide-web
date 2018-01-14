@@ -48,6 +48,7 @@ def message_gen(target, timestamp, event, payload):
         "event" : event,
         "payload" : payload
     }
+    print "new message: " + str(message)
     return message
 def preheat_est(temp):
     # TODO estimate preheat time
@@ -150,6 +151,8 @@ def task_scheduler(messages):
 #        if get_time_diff(get_time(), ) 
         for i, message in enumerate(messages):
             if message["target"] == "TASK_SCHEDULER":
+                print "event for scheduler: " + str(message)
+                # print str(message)
                 if message["event"] == "ANOVA_ORDER": #new order received
                     cook_time = message["payload"]["cook_time"]
                     cook_temp = message["payload"]["cook_temp"]
@@ -208,7 +211,7 @@ def task_flask(messages):
 def task_anova(messages):
     anova = AnovaController(ANOVA_MAC_ADDRESS)
     device_status = anova.anova_status() #'running', 'stopped', 'low water', 'heater error' + "preheating" (custom)
-    
+    print "anova connected"
     #check connection, check system status
     while True:
         if not anova.is_connected :
@@ -226,6 +229,7 @@ def task_anova(messages):
 
                 for i, message in enumerate(messages):
                     if message["target"] == "TASK_ANOVA":
+                        print "event for anova: " + str(message)
                         if message["event"] == "ANOVA_ORDER":
                             print "anova order received in task_anova"
                         #     preheat_time = ANOVA_PRE_HEAT_TIME #TODO: check temp diff for estimate
