@@ -56,7 +56,7 @@ def preheat_est(temp):
 def update_time(target_time, duration):
     if target_time[4] - duration:
         return  strptime(str(target_time[3])+":"+str(target_time[4]-duration),"%H:%M")
-    elif 
+    else:
         time_hr = target_time[3] - duration/60
         time_min = target_time[4] - duration%60
         if time_min < 0:
@@ -133,7 +133,7 @@ def task_timer(messages, timer_name, min):
         min -=1  
 
     message = message_gen(
-        "TASK_SCHEDULER", "str(get_time()), "SCHEDULER_TIME_UP", {
+        "TASK_SCHEDULER", str(get_time()), "SCHEDULER_TIME_UP", {
                 "timer_time" : timer_time,
                 "timer_name" : timer_name
             }
@@ -147,9 +147,9 @@ def task_scheduler(messages):
     # start_cook_time = time.strptime("0:0", "%H:%M")
     # ready_time = time.strptime("0:0","%H:%M")
     while True:
-        if get_time_diff(get_time(), ) 
+#        if get_time_diff(get_time(), ) 
         for i, message in enumerate(messages):
-            if message["target"] = "TASK_SCHEDULER":
+            if message["target"] == "TASK_SCHEDULER":
                 if message["event"] == "ANOVA_ORDER": #new order received
                     cook_time = message["payload"]["cook_time"]
                     cook_temp = message["payload"]["cook_temp"]
@@ -168,7 +168,7 @@ def task_scheduler(messages):
                     else:
                         process_timer = multiprocessing.Process(
                             target = task_timer,
-                            args = ("TIMER_TO_PREHEAT", time_to_preheat ,)
+                            args = ("TIMER_TO_PREHEAT", time_to_preheat ,))
                         process_timer.start()
 
                 elif message["event"] == "SCHEDULER_TIME_UP":
@@ -184,9 +184,9 @@ def task_scheduler(messages):
                 elif message["event"] == "SCHEDULER_PREHEAT_DONE":
                     #TODO:update final ready time
                     print "preheat done"        
-                    packet = message_gen{
+                    packet = message_gen(
                         "TASK_ANOVA", str(get_time()), "ANOVA_COOK", {}
-                    }           
+                    )
                     messages.append(packet)
 
                 messages.pop(i)
