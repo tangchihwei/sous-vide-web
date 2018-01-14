@@ -119,9 +119,6 @@ def task_timer(messages, timer_name, min):
 #this task 
 def task_scheduler(messages):
     print "in task scheduler"
-    # preheat_start_time = time.strptime("0:0","%H:%M")
-    # start_cook_time = time.strptime("0:0", "%H:%M")
-    # ready_time = time.strptime("0:0","%H:%M")
     while True:
 #        if get_time_diff(get_time(), ) 
         for i, message in enumerate(messages):
@@ -131,7 +128,6 @@ def task_scheduler(messages):
                 if message["event"] == "ANOVA_ORDER": #new order received
                     cook_time = message["payload"]["cook_time"]
                     cook_temp = message["payload"]["cook_temp"]
-                    # ready_time = time.strptime((message["payload"]["ready_time"]),"%H:%M") #parse ready time in 24hr
                     ready_time = message["payload"]["ready_time"]
 
                     temp_time = get_time_diff(get_time(), ready_time)
@@ -170,14 +166,8 @@ def task_scheduler(messages):
                         "TASK_ANOVA", str(get_time()), "ANOVA_COOK", {}
                     )
                     messages.append(packet)
-
                 messages.pop(i)
-
-                
-
         time.sleep(0.2) #5 Hz
-
-
 
 def task_flask(messages):
     app.messages = messages
@@ -214,9 +204,7 @@ def task_anova(messages):
                         # packet = message_gen("TASK_SCHEDULER,")
                     else:
                         print "Food is ready"
-                        # anova.stop_timer()
-                        # stop_anova_timer
-                        anova.send_command_async("stop time")
+                        anova.send_command_async("stop time") #stop anova timer, TODO: need to test further to stop the beeping after done.
                         anova.stop_anova()
                         device_status = "stopped"
 
@@ -229,16 +217,11 @@ def task_anova(messages):
                             anova.set_temp(cook_temp)
                             anova.set_timer(cook_time)
                             anova.start_anova()
-                            # print "start anova, machine not started"
                             device_status = "preheating" #need to validate
                         elif message["event"] == "ANOVA_COOK":
                             print "start timer"
                             anova.start_timer()
                             device_status = "cooking"
-                            anova.send_command_async("stop time")
-                            print "timer stopped"
-                        # else :
-                        #     # print "other event: " + message["event"]
                         messages.pop(i)
         time.sleep(0.5) #2 Hz message queue
 
