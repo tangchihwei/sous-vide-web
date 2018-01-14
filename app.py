@@ -145,7 +145,7 @@ def task_timer(messages, timer_name, min):
 
 #this task 
 def task_scheduler(messages):
-
+    print "in task scheduler"
     # preheat_start_time = time.strptime("0:0","%H:%M")
     # start_cook_time = time.strptime("0:0", "%H:%M")
     # ready_time = time.strptime("0:0","%H:%M")
@@ -260,9 +260,14 @@ def main():
     process_anova = multiprocessing.Process(
         target = task_anova,
         args = (messages,))
+    process_scheduler = multiprocessing.Process(
+        target = task_scheduler,
+        args = (messages,))
     process_flask.start()
     process_anova.start()
+    process_scheduler.start()
     process_flask.join()
+    process_scheduler.join()
     process_anova.join()
 
 if __name__ == '__main__':
