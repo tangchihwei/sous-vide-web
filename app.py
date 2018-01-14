@@ -28,11 +28,11 @@ def get_time_diff(now, ready_time):
         print str(dinner_time[3]) + " : " + str(dinner_time[4])
 
 	if int(dinner_time[3])-int(current_time[3]) >= 0:
-        val_hr = int(dinner_time[3]) - int(current_time[3])
-        val_min = int(dinner_time[4])-int(current_time[4])
+            val_hr = int(dinner_time[3]) - int(current_time[3])
+            val_min = int(dinner_time[4])-int(current_time[4])
 	else: #next day
-        val_hr = int(dinner_time[3]) + 24 - int(current_time[3])
-        val_min = int(dinner_time[4]) - int(current_time[4])
+            val_hr = int(dinner_time[3]) + 24 - int(current_time[3])
+            val_min = int(dinner_time[4]) - int(current_time[4])
 	return 60 * val_hr + val_min
 
 def float_compare(a, b):
