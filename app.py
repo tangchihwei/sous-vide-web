@@ -218,10 +218,11 @@ def task_anova(messages):
                 print "low water!" #status change, something wrong?
             else: 
                 if device_status == "preheating":
+                    print "preheating"
                     if float_compare(anova.read_temp() ,anova.read_set_temp()):
+                        print "preheating completed"
                         packet = message_gen("TASK_SCHEDULER", str(get_time()), "SCHEDULER_PREHEAT_DONE", {})
                         messages.append(packet)
-
 
                 for i, message in enumerate(messages):
                     if message["target"] == "TASK_ANOVA":
