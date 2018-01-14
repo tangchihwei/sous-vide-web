@@ -64,7 +64,9 @@ def update_time(target_time, duration):
             time_hr -= 1
             time_min = 60 + time_min
         return striptime(str(timehr) + ":" + str(time_min), "%H:%M")
-
+def ble_connection():
+    #TODO: check ble connection
+    return True
         
 @app.route('/')
 def index():
@@ -214,7 +216,7 @@ def task_anova(messages):
     print "anova connected"
     #check connection, check system status
     while True:
-        if not anova.is_connected :
+        if not ble_connection() :
             anova.connect()
         else:
             if anova.anova_status() == "low water":
