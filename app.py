@@ -90,8 +90,7 @@ def control():
             "cook_temp" : cook_temp,
             "cook_time" : cook_time,
             "ready_time" : ready_time
-        }
-        )
+        })
 
     app.messages.append(message)
     message["target"] = "TASK_SCHEDULER"
@@ -184,8 +183,12 @@ def task_scheduler(messages):
 
                 elif message["event"] == "SCHEDULER_PREHEAT_DONE":
                     #TODO:update final ready time
-                    #start                    
-
+                    #start 
+                    print "preheat done"        
+                    packet = message_gen{
+                        "TASK_ANOVA", str(get_time()), "ANOVA_COOK", {}
+                    }           
+                    messages.append(packet)
 
                 messages.pop(i)
 
@@ -225,10 +228,10 @@ def task_anova(messages):
                         #     messages.append(message_gen("TASK_SCHEDULER", str(get_time()), "SCHEDULER_PREHEAT_EST", preheat_time))
                         if message["event"] == "ANOVA_PREHEAT":
                             anova.set_temp(message["payload"]["cook_temp"])
+                            anova.set_timer(message["payload"]["cook_time"])
                             anova.start_anova()
                             device_status = "running" #need to validate
                         elif message["event"] == "ANOVA_COOK":
-                            anova.set_timer(message["payload"]["cook_time"])
                             anova.start_timer()
                         else :
                             print "other event: " + message["event"]
