@@ -160,7 +160,8 @@ def task_scheduler(messages):
                     cook_temp = message["payload"]["cook_temp"]
                     # ready_time = time.strptime((message["payload"]["ready_time"]),"%H:%M") #parse ready time in 24hr
                     ready_time = message["payload"]["ready_time"]
-                    time_to_preheat = get_time_diff(get_time(), ready_time) - preheat_est(cook_temp) - cook_time
+                    temp_time = get_time_diff(get_time(), ready_time)
+                    time_to_preheat = temp_time - preheat_est(cook_temp) - cook_time
                     print "time to preheat: " + str(time_to_preheat)
                     if time_to_preheat <= 0:
                         print "start anova now"
@@ -252,8 +253,8 @@ def task_anova(messages):
                             print "start timer"
                             anova.start_timer()
                             device_status = "running"
-                        else :
-                            print "other event: " + message["event"]
+                        # else :
+                        #     # print "other event: " + message["event"]
                         messages.pop(i)
         time.sleep(0.5) #2 Hz message queue
 
