@@ -240,7 +240,7 @@ def task_anova(messages):
                             print "anova order received in task_anova"
                         #     preheat_time = ANOVA_PRE_HEAT_TIME #TODO: check temp diff for estimate
                         #     messages.append(message_gen("TASK_SCHEDULER", str(get_time()), "SCHEDULER_PREHEAT_EST", preheat_time))
-                        if message["event"] == "ANOVA_PREHEAT":
+                        elif message["event"] == "ANOVA_PREHEAT":
                             cook_temp = message["payload"]["cook_temp"]
                             cook_time = message["payload"]["cook_time"]
                             anova.set_temp(cook_temp)
