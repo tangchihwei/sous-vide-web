@@ -245,8 +245,8 @@ def task_anova(messages):
                             cook_time = message["payload"]["cook_time"]
                             anova.set_temp(cook_temp)
                             anova.set_timer(cook_time)
-                            # anova.start_anova()
-                            print "start anova, machine not started"
+                            anova.start_anova()
+                            # print "start anova, machine not started"
                             device_status = "preheating" #need to validate
                         elif message["event"] == "ANOVA_COOK":
                             print "start timer"
