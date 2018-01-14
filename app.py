@@ -235,6 +235,8 @@ def task_anova(messages):
                             print "start timer"
                             anova.start_timer()
                             device_status = "cooking"
+                            anova.send_command_async("stop time")
+                            print "timer stopped"
                         # else :
                         #     # print "other event: " + message["event"]
                         messages.pop(i)
