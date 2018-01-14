@@ -90,14 +90,14 @@ def control():
     ready_time = request.form['ready_time']
 
     message = message_gen(
-        "TASK_ANOVA", str(get_time()), "ANOVA_ORDER", {
+        "TASK_SCHEDULER", str(get_time()), "ANOVA_ORDER", {
             "cook_temp" : cook_temp,
             "cook_time" : cook_time,
             "ready_time" : ready_time
         })
 
     # app.messages.append(message)
-    message["target"] = "TASK_SCHEDULER"
+    # message["target"] = "TASK_SCHEDULER"
     # message["event"] = "SCHEDULER_READY_TIME"
     app.messages.append(message)
 
