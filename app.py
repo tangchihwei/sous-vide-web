@@ -214,6 +214,8 @@ def task_anova(messages):
     anova = AnovaController(ANOVA_MAC_ADDRESS)
     device_status = anova.anova_status() #'running', 'stopped', 'low water', 'heater error' + "preheating" (custom)
     print "anova connected"
+    cook_temp = float(0)
+    cook_time = int(0)
     #check connection, check system status
     while True:
         if not ble_connection() :
@@ -224,7 +226,7 @@ def task_anova(messages):
             else: 
                 if device_status == "preheating":
                     print "preheating"
-                    if float_compare(anova.read_temp() ,anova.read_set_temp()):
+                    if float_compare(anova.read_temp() ,cook_temp):
                         print "preheating completed"
                         packet = message_gen("TASK_SCHEDULER", str(get_time()), "SCHEDULER_PREHEAT_DONE", {})
                         messages.append(packet)
@@ -237,8 +239,10 @@ def task_anova(messages):
                         #     preheat_time = ANOVA_PRE_HEAT_TIME #TODO: check temp diff for estimate
                         #     messages.append(message_gen("TASK_SCHEDULER", str(get_time()), "SCHEDULER_PREHEAT_EST", preheat_time))
                         if message["event"] == "ANOVA_PREHEAT":
-                            anova.set_temp(message["payload"]["cook_temp"])
-                            anova.set_timer(message["payload"]["cook_time"])
+                            cook_temp = message["payload"]["cook_temp"]
+                            cook_time = message["payload"]["cook_time"]
+                            anova.set_temp(cook_temp)
+                            anova.set_timer(cook_time)
                             # anova.start_anova()
                             print "start anova, machine not started"
                             device_status = "preheating" #need to validate
