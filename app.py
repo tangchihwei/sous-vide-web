@@ -214,8 +214,11 @@ def task_anova(messages):
                         # packet = message_gen("TASK_SCHEDULER,")
                     else:
                         print "Food is ready"
-                        anova.stop_timer()
+                        # anova.stop_timer()
+                        # stop_anova_timer
+                        anova.send_command_async("stop time")
                         anova.stop_anova()
+                        device_status = "stopped"
 
                 for i, message in enumerate(messages):
                     if message["target"] == "TASK_ANOVA":
