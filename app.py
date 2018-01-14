@@ -29,8 +29,8 @@ def get_time_diff(now, ready_time):
 	if int(dinner_time[3])-int(current_time[3]) >= 0:
             val = 60*(int(dinner_time[3]) - int(current_time[3])) + (int(dinner_time[4])-int(current_time[4]))
             return val
-	else:
-		return -1
+	elif :
+		return  
 		# TODO: check to see whether ready time is for next day
 
 def float_compare(a, b):
@@ -237,6 +237,14 @@ def task_anova(messages):
                         packet = message_gen("TASK_SCHEDULER", str(get_time()), "SCHEDULER_PREHEAT_DONE", {})
                         messages.append(packet)
                         device_status = "post preheat"
+                elif device_status == "cooking":
+                    if anova.read_timer().split()[1] == "running":
+                        print "Food still cooking.." + str(anova.read_timer().split()[0]) + "more minutes to go"
+                        # packet = message_gen("TASK_SCHEDULER,")
+                    else:
+                        print "Food is ready"
+                        anova.stop_timer()
+                        anova.stop_anova()
 
                 for i, message in enumerate(messages):
                     if message["target"] == "TASK_ANOVA":
@@ -256,7 +264,7 @@ def task_anova(messages):
                         elif message["event"] == "ANOVA_COOK":
                             print "start timer"
                             anova.start_timer()
-                            device_status = "running"
+                            device_status = "cooking"
                         # else :
                         #     # print "other event: " + message["event"]
                         messages.pop(i)
