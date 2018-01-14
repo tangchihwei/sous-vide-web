@@ -200,6 +200,8 @@ def task_anova(messages):
                         device_status = "post preheat"
                 elif device_status == "cooking":
                     if anova.read_timer().split()[1] == "running":
+                        if (anova.read_timer().split()[0] == 1):
+                            anova.send_command_async("stop time")
                         print "Food still cooking.." + str(anova.read_timer().split()[0]) + "more minutes to go"
                         # packet = message_gen("TASK_SCHEDULER,")
                     else:
