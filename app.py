@@ -185,6 +185,7 @@ def task_anova(messages):
     #check connection, check system status
     while True:
         if not ble_connection(anova) :
+            print "reconnecting"
             anova.connect()
         else:
             if anova.anova_status() == "low water":
