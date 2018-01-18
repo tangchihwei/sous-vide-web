@@ -186,10 +186,13 @@ def task_flask(messages):
     #     time.sleep(2) #0.5 Hz
 
 def task_anova(messages):
-    try:
-        anova = AnovaController(ANOVA_MAC_ADDRESS)
-    except btle.BTLEException:
-        print "not able to connect"
+    while True:
+        try:
+            anova = AnovaController(ANOVA_MAC_ADDRESS)
+            break
+        except btle.BTLEException:
+            print "not able to connect"
+        time.sleep(5)
 
     device_status = anova.anova_status() #'running', 'stopped', 'low water', 'heater error' + "preheating" (custom)
     print "anova connected"
