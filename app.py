@@ -72,12 +72,14 @@ def update_time(target_time, duration):
         return striptime(str(timehr) + ":" + str(time_min), "%H:%M")
 def ble_connection(anova):
     try: 
-        val = anova.read_unit()
+        unit = anova.read_unit()
+        val = True
+        print "connection good!"
     except TypeError:
         print "connection error"
-        val = "n"
+        val = False
 
-    return val == "c"
+    return val 
 
         
 @app.route('/')
