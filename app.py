@@ -194,7 +194,10 @@ def task_anova(messages):
             print "not able to connect"
         time.sleep(5)
 
-    device_status = anova.anova_status() #'running', 'stopped', 'low water', 'heater error' + "preheating" (custom)
+    try: 
+        device_status = anova.anova_status() #'running', 'stopped', 'low water', 'heater error' + "preheating" (custom)
+    except NoneType: 
+        print "unable to read anova, weird. may need to reconnect "
     print "anova connected"
     cook_temp = float(0)
     cook_time = int(0)
