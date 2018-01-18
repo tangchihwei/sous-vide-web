@@ -73,6 +73,8 @@ def ble_connection(anova):
         val = anova.read_unit()
     except TypeError:
         print "connection error"
+        val = "n"
+
     return val == "c"
 
         
