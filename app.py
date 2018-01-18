@@ -217,8 +217,7 @@ def task_anova(messages):
         else:
             try: 
                 low_water = False
-                device_status = anova.anova_status() 
-                if device_status == "low water":
+                if anova.anova_status()  == "low water":
                     print "low water!" #status change, something wrong?
                     low_water = True
             except (TypeError, btle.BTLEException) as e:
