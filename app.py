@@ -69,7 +69,13 @@ def update_time(target_time, duration):
             time_min = 60 + time_min
         return striptime(str(timehr) + ":" + str(time_min), "%H:%M")
 def ble_connection(anova):
-   return anova.read_unit() == "c"
+    try: 
+        val = anova.read_unit()
+        break
+    except TypeError:
+        print "connection error"
+    return val == "c"
+
         
 @app.route('/')
 def index():
@@ -188,7 +194,7 @@ def task_anova(messages):
             print "reconnecting"
             anova.connect()
         else:
-            if anova.anova_status() == "low water":
+            if try anova.anova_status() == "low water":
                 print "low water!" #status change, something wrong?
             else: 
                 if device_status == "preheating":
