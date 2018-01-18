@@ -71,7 +71,6 @@ def update_time(target_time, duration):
 def ble_connection(anova):
     try: 
         val = anova.read_unit()
-        break
     except TypeError:
         print "connection error"
     return val == "c"
@@ -194,7 +193,7 @@ def task_anova(messages):
             print "reconnecting"
             anova.connect()
         else:
-            if try anova.anova_status() == "low water":
+            if anova.anova_status() == "low water":
                 print "low water!" #status change, something wrong?
             else: 
                 if device_status == "preheating":
