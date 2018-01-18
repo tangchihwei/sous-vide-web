@@ -223,21 +223,31 @@ def task_anova(messages):
             else: 
                 if device_status == "preheating":
                     print "preheating"
-                    if float_compare(float(anova.read_temp()) ,cook_temp):
+                    try: 
+                        anova_temp = anova.read_temp()
+                    except (TypeError, btle.BTLEException) as e:
+                        print e + " unable to read anova temp"
+                        anova_temp = 0
+                    if float_compare(float(anova_temp) ,cook_temp):
                         print "preheating completed"
                         packet = message_gen("TASK_SCHEDULER", str(get_time()), "SCHEDULER_PREHEAT_DONE", {})
                         messages.append(packet)
                         device_status = "post preheat"
                 elif device_status == "cooking":
-                    if anova.read_timer().split()[1] == "running":
-                        print "Food still cooking.." + str(anova.read_timer().split()[0]) + "more minutes to go"
-                        # packet = message_gen("TASK_SCHEDULER,")
+                    try:
+                        anova_timer = anova.read_timer()
+                    except (TypeError, btle.BTLEException) as e:
+                        print e + "unable to read anova timer"
+
                     else:
-                        print "Food is ready"
-                        anova.send_command_async("stop time") #stop anova timer, TODO: need to test further to stop the beeping after done.
+                        if anova_timer.split()[1] == "running":
+                            print "Food still cooking.." + str(anova_timer).split()[0]) + "more minutes to go"
+                        else:
+                            print "Food is ready"
+                            anova.send_command_async("stop time") #stop anova timer, TODO: need to test further to stop the beeping after done.
                         # anova.stop_anova() #anova keeps beeping afterwards
-                        anova.set_temp(20)
-                        device_status = "stopped"
+                            anova.set_temp(20)
+                            device_status = "stopped"
 
                 for i, message in enumerate(messages):
                     if message["target"] == "TASK_ANOVA":
