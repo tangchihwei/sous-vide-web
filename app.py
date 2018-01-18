@@ -74,7 +74,7 @@ def ble_connection(anova):
     try: 
         unit = anova.read_unit()
         val = True
-        print "connection good!"
+        # print "connection good!"
     except (TypeError, btle.BTLEException) as e:
         print str(e) + " connection error"
         val = False
