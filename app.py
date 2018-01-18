@@ -75,15 +75,10 @@ def ble_connection(anova):
         unit = anova.read_unit()
         val = True
         print "connection good!"
-    except TypeError:
-        print "connection error"
+    except (TypeError, btle.BTLEException) as e:
+        print e + " connection error"
         val = False
-    except btle.BTLEException:
-        print "device disconnected"
-        val = False
-
     return val 
-
         
 @app.route('/')
 def index():
@@ -198,16 +193,16 @@ def task_anova(messages):
             anova = AnovaController(ANOVA_MAC_ADDRESS)
             print "anova connected"
             break
-        except btle.BTLEException:
-            print "not able to connect"
+        except (TypeError, btle.BTLEException) as e:
+            print e + " not able to connect"
         print "wait 3 seconds, and try again"
         time.sleep(3)
 
     try: 
         device_status = anova.anova_status() #'running', 'stopped', 'low water', 'heater error' + "preheating" (custom)
         print "read successful"
-    except TypeError: 
-        print "unable to read anova, weird. may need to reconnect "
+    except (TypeError, btle.BTLEException) as e:
+        print e + " unable to read anova, weird. may need to reconnect "
     cook_temp = float(0)
     cook_time = int(0)
     #check connection, check system status
@@ -217,12 +212,14 @@ def task_anova(messages):
             # anova.close()
             try: 
                 anova = AnovaController(ANOVA_MAC_ADDRESS)
-            except btle.BTLEException:
-                print "...still not able to connect"
-
+            except (TypeError, btle.BTLEException) as e:
+                print e + "...still not able to connect"
         else:
-            if anova.anova_status() == "low water":
+            try: 
+                anova.anova_status() == "low water":
                 print "low water!" #status change, something wrong?
+            except (TypeError, btle.BTLEException) as e:
+                print e
             else: 
                 if device_status == "preheating":
                     print "preheating"
