@@ -4,6 +4,8 @@ import time
 import os
 import logging, sys, datetime
 import multiprocessing
+from bluepy import btle
+
 
 app = Flask(__name__)
 
@@ -186,7 +188,7 @@ def task_flask(messages):
 def task_anova(messages):
     try:
         anova = AnovaController(ANOVA_MAC_ADDRESS)
-    except BTLEException:
+    except btle.BTLEException:
         print "not able to connect"
 
     device_status = anova.anova_status() #'running', 'stopped', 'low water', 'heater error' + "preheating" (custom)
@@ -200,7 +202,7 @@ def task_anova(messages):
             # anova.close()
             try: 
                 anova = AnovaController(ANOVA_MAC_ADDRESS)
-            except BTLEException:
+            except btle.BTLEException:
                 print "...still not able to connect"
 
         else:
