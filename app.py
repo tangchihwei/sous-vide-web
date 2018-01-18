@@ -216,11 +216,15 @@ def task_anova(messages):
                 print e + "...still not able to connect"
         else:
             try: 
-                anova.anova_status() == "low water":
-                print "low water!" #status change, something wrong?
+                device_status = anova.anova_status() 
+                if device_status == "low water":
+                    print "low water!" #status change, something wrong?
+                    low_water = True
+                low_water = False
             except (TypeError, btle.BTLEException) as e:
                 print e
-            else: 
+                low_water = False
+            if not low_water:
                 if device_status == "preheating":
                     print "preheating"
                     try: 
