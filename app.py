@@ -78,6 +78,9 @@ def ble_connection(anova):
     except TypeError:
         print "connection error"
         val = False
+    except btle.BTLEException:
+        print "device disconnected"
+        val = False
 
     return val 
 
@@ -194,7 +197,8 @@ def task_anova(messages):
             break
         except btle.BTLEException:
             print "not able to connect"
-        time.sleep(5)
+        print "wait 3 seconds, and try again"
+        time.sleep(3)
 
     try: 
         device_status = anova.anova_status() #'running', 'stopped', 'low water', 'heater error' + "preheating" (custom)
