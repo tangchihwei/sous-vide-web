@@ -184,7 +184,11 @@ def task_flask(messages):
     #     time.sleep(2) #0.5 Hz
 
 def task_anova(messages):
-    anova = AnovaController(ANOVA_MAC_ADDRESS)
+    try:
+        anova = AnovaController(ANOVA_MAC_ADDRESS)
+    except BTLEException:
+        print "not able to connect"
+
     device_status = anova.anova_status() #'running', 'stopped', 'low water', 'heater error' + "preheating" (custom)
     print "anova connected"
     cook_temp = float(0)
@@ -193,7 +197,12 @@ def task_anova(messages):
     while True:
         if not ble_connection(anova) :
             print "reconnecting"
-            anova.connect()
+            # anova.close()
+            try: 
+                anova = AnovaController(ANOVA_MAC_ADDRESS)
+            except BTLEException:
+                print "...still not able to connect"
+
         else:
             if anova.anova_status() == "low water":
                 print "low water!" #status change, something wrong?
