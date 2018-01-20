@@ -4,6 +4,8 @@ import time
 import os
 import logging, sys, datetime
 import multiprocessing
+from bluepy import btle
+
 
 app = Flask(__name__)
 
@@ -68,9 +70,15 @@ def update_time(target_time, duration):
             time_hr -= 1
             time_min = 60 + time_min
         return striptime(str(timehr) + ":" + str(time_min), "%H:%M")
-def ble_connection():
-    #TODO: check ble connection
-    return True
+def ble_connection(anova):
+    try: 
+        unit = anova.read_unit()
+        val = True
+        # print "connection good!"
+    except (TypeError, btle.BTLEException) as e:
+        print str(e) + " connection error"
+        val = False
+    return val 
         
 @app.route('/')
 def index():
@@ -178,35 +186,71 @@ def task_flask(messages):
     #     time.sleep(2) #0.5 Hz
 
 def task_anova(messages):
-    anova = AnovaController(ANOVA_MAC_ADDRESS)
-    device_status = anova.anova_status() #'running', 'stopped', 'low water', 'heater error' + "preheating" (custom)
-    print "anova connected"
+    device_status = "before start"
+    anova = AnovaController.__new__(AnovaController)
+    while True:
+        try:
+            anova = AnovaController(ANOVA_MAC_ADDRESS)
+            print "anova connected"
+            break
+        except (TypeError, btle.BTLEException) as e:
+            print str(e) + " not able to connect"
+        print "wait 3 seconds, and try again"
+        time.sleep(3)
+
+    try: 
+        device_status = anova.anova_status() #'running', 'stopped', 'low water', 'heater error' + "preheating" (custom)
+        print "read successful"
+    except (TypeError, btle.BTLEException) as e:
+        print str(e) + " unable to read anova, weird. may need to reconnect "
     cook_temp = float(0)
     cook_time = int(0)
     #check connection, check system status
     while True:
-        if not ble_connection() :
-            anova.connect()
+        if not ble_connection(anova) :
+            print "reconnecting"
+            # anova.close()
+            try: 
+                anova = AnovaController(ANOVA_MAC_ADDRESS)
+            except (TypeError, btle.BTLEException) as e:
+                print str(e) + "...still not able to connect"
         else:
-            if anova.anova_status() == "low water":
-                print "low water!" #status change, something wrong?
-            else: 
+            try: 
+                low_water = False
+                if anova.anova_status()  == "low water":
+                    print "low water!" #status change, something wrong?
+                    low_water = True
+            except (TypeError, btle.BTLEException) as e:
+                print str(e)
+            if not low_water:
+                print "device status : " + device_status 
                 if device_status == "preheating":
                     print "preheating"
-                    if float_compare(float(anova.read_temp()) ,cook_temp):
+                    try: 
+                        anova_temp = anova.read_temp()
+                    except (TypeError, btle.BTLEException) as e:
+                        print str(e) + " unable to read anova temp"
+                        anova_temp = 0
+                    if float_compare(float(anova_temp) ,cook_temp):
                         print "preheating completed"
                         packet = message_gen("TASK_SCHEDULER", str(get_time()), "SCHEDULER_PREHEAT_DONE", {})
                         messages.append(packet)
                         device_status = "post preheat"
                 elif device_status == "cooking":
-                    if anova.read_timer().split()[1] == "running":
-                        print "Food still cooking.." + str(anova.read_timer().split()[0]) + "more minutes to go"
-                        # packet = message_gen("TASK_SCHEDULER,")
+                    try:
+                        anova_timer = anova.read_timer()
+                    except (TypeError, btle.BTLEException) as e:
+                        print str(e) + "unable to read anova timer"
+
                     else:
-                        print "Food is ready"
-                        anova.send_command_async("stop time") #stop anova timer, TODO: need to test further to stop the beeping after done.
-                        anova.stop_anova()
-                        device_status = "stopped"
+                        if anova_timer.split()[1] == "running":
+                            print "Food still cooking.." + str(anova_timer).split()[0] + "more minutes to go"
+                        else:
+                            print "Food is ready"
+                            anova.send_command_async("stop time") #stop anova timer, TODO: need to test further to stop the beeping after done.
+                        # anova.stop_anova() #anova keeps beeping afterwards
+                            anova.set_temp(20)
+                            device_status = "stopped"
 
                 for i, message in enumerate(messages):
                     if message["target"] == "TASK_ANOVA":
