@@ -231,6 +231,7 @@ def task_anova(messages):
                         device_status = "post preheat"
                     else:
                         print str(get_time()) + " -- preheating, current temp: " + str(anova_temp) + " - target temp: " + str(cook_temp)
+                        time.sleep(20)
                 elif device_status == "cooking":
                     try:
                         anova_timer = anova.read_timer()
