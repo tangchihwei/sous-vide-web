@@ -229,6 +229,8 @@ def task_anova(messages):
                         packet = message_gen("TASK_SCHEDULER", str(get_time()), "SCHEDULER_PREHEAT_DONE", {})
                         messages.append(packet)
                         device_status = "post preheat"
+                    else:
+                        print str(get_time()) + " -- preheating, current temp: " + str(anova_temp) + " - target temp: " + str(cook_temp)
                 elif device_status == "cooking":
                     try:
                         anova_timer = anova.read_timer()
