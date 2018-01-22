@@ -79,6 +79,16 @@ def ble_connection(anova):
         print str(e) + " connection error"
         val = False
     return val 
+
+def anova_start_preheat(messages):
+    print "start anova now"
+    packet = message_gen(
+        "TASK_ANOVA", str(get_time()), "ANOVA_PREHEAT",
+        {
+            "cook_temp" : cook_temp,
+            "cook_time" : cook_time
+        })
+    messages.append(packet)
         
 @app.route('/')
 def index():
@@ -141,14 +151,7 @@ def task_scheduler(messages):
                     time_to_preheat = temp_time - preheat_est(cook_temp) - cook_time
                     print "time to preheat: " + str(time_to_preheat)
                     if time_to_preheat <= 0:
-                        print "start anova now"
-                        packet = message_gen(
-                            "TASK_ANOVA", str(get_time()), "ANOVA_PREHEAT",
-                            {
-                                "cook_temp" : cook_temp,
-                                "cook_time" : cook_time
-                            })
-                        messages.append(packet)
+                        anova_start_preheat(messages)
                     else:
                         process_timer = multiprocessing.Process(
                             target = task_timer,
@@ -157,13 +160,14 @@ def task_scheduler(messages):
 
                 elif message["event"] == "SCHEDULER_TIME_UP":
                     if message["payload"]["timer_name"] == "TIMER_TO_PREHEAT":
-                        packet = message_gen(
-                            "TASK_ANOVA", str(get_time()), "ANOVA_PREHEAT",
-                            {
-                                "cook_temp" : cook_temp,
-                                "cook_time" : cook_time
-                            })
-                        messages.append(packet)
+                        anova_start_preheat(messages)
+                        # packet = message_gen(
+                        #     "TASK_ANOVA", str(get_time()), "ANOVA_PREHEAT",
+                        #     {
+                        #         "cook_temp" : cook_temp,
+                        #         "cook_time" : cook_time
+                        #     })
+                        # messages.append(packet)
 
                 elif message["event"] == "SCHEDULER_PREHEAT_DONE":
                     #TODO:update final ready time
@@ -264,7 +268,7 @@ def task_anova(messages):
                                 anova.set_timer(cook_time)
                                 anova.start_anova()
                             except (TypeError, btle.BTLEException) as e:
-                                print str(e) + " unable to set temperature and start preheating"
+                                print str(e) + " unable to set temperature and start preheating, connection may have failed"
                             else:
                                 device_status = "preheating" #need to validate
                         elif message["event"] == "ANOVA_COOK":
