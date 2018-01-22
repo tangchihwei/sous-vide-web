@@ -259,6 +259,7 @@ def task_anova(messages):
 
                 for i, message in enumerate(messages):
                     if message["target"] == "TASK_ANOVA":
+                        message_processed = False
                         print "event for anova: " + str(message)
                         if message["event"] == "ANOVA_PREHEAT":
                             cook_temp = message["payload"]["cook_temp"]
@@ -271,6 +272,7 @@ def task_anova(messages):
                                 print str(e) + " unable to set temperature and start preheating, connection may have failed"
                             else:
                                 device_status = "preheating" #need to validate
+                                message_processed = True
                         elif message["event"] == "ANOVA_COOK":
                             print "start timer"
                             try:
@@ -279,7 +281,9 @@ def task_anova(messages):
                                 print str(e) + " unable to start timer"
                             else:
                                 device_status = "cooking"
-                        messages.pop(i)
+                                message_processed = True
+                        if message_processed:
+                            messages.pop(i) 
         time.sleep(0.5) #2 Hz message queue
 
 def main():
