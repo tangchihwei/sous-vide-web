@@ -128,11 +128,9 @@ def task_timer(messages, timer_name, min):
 def task_scheduler(messages):
     print "in task scheduler"
     while True:
-#        if get_time_diff(get_time(), ) 
         for i, message in enumerate(messages):
             if message["target"] == "TASK_SCHEDULER":
                 print "event for scheduler: " + str(message)
-                # print str(message)
                 if message["event"] == "ANOVA_ORDER": #new order received
                     cook_time = message["payload"]["cook_time"]
                     cook_temp = message["payload"]["cook_temp"]
@@ -223,7 +221,6 @@ def task_anova(messages):
             except (TypeError, btle.BTLEException) as e:
                 print str(e)
             if not low_water:
-                print "device status : " + device_status 
                 if device_status == "preheating":
                     print "preheating"
                     try: 
@@ -280,7 +277,7 @@ def task_anova(messages):
                                 device_status = "cooking"
                         messages.pop(i)
         time.sleep(0.5) #2 Hz message queue
-        
+
 def main():
 
     manager = multiprocessing.Manager()
