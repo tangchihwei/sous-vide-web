@@ -80,7 +80,7 @@ def ble_connection(anova):
         val = False
     return val 
 
-def anova_start_preheat(messages):
+def anova_start_preheat(messages, cook_temp, cook_time):
     print "start anova now"
     packet = message_gen(
         "TASK_ANOVA", str(get_time()), "ANOVA_PREHEAT",
@@ -151,7 +151,7 @@ def task_scheduler(messages):
                     time_to_preheat = temp_time - preheat_est(cook_temp) - cook_time
                     print "time to preheat: " + str(time_to_preheat)
                     if time_to_preheat <= 0:
-                        anova_start_preheat(messages)
+                        anova_start_preheat(messages, cook_temp, cook_time)
                     else:
                         process_timer = multiprocessing.Process(
                             target = task_timer,
@@ -160,7 +160,7 @@ def task_scheduler(messages):
 
                 elif message["event"] == "SCHEDULER_TIME_UP":
                     if message["payload"]["timer_name"] == "TIMER_TO_PREHEAT":
-                        anova_start_preheat(messages)
+                        anova_start_preheat(messages, cook_temp, cook_time)
                         # packet = message_gen(
                         #     "TASK_ANOVA", str(get_time()), "ANOVA_PREHEAT",
                         #     {
