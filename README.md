@@ -12,28 +12,19 @@ Be sure to checkout the basic requirements for PyCirculate library and Flask
 
 ### Usage
 
-A step by step series of examples that tell you have to get a development env running
+Simply fill in the time for the food to be ready, and the desired cooking temperature and time.
 
-Say what the step will be
-
-```
-Give the example
-```
-
-And repeat
-
-```
-until finished
-```
-
-End with an example of getting some data out of the system or using it for a little demo
-
-## Running the tests
-
-Explain how to run the automated tests for this system
+![web](https://raw.githubusercontent.com/tangchihwei/sous-vide-web/assets/assets/web.png)
 
 ## System Diagram
 ![multiprocess](https://raw.githubusercontent.com/tangchihwei/sous-vide-web/assets/assets/multiprocess.png)
+
+## TODO
+1. Better UI for the web, with dynamic updates of the latest cooking status.
+2. Allow users to copy recipe link and automatically parse the cook time and temperature
+3. Debug "TypeError" after the cook is completed and machine stops.
+4. Update preheat estimate with autocalibration.
+
 
 ## Built With
 
