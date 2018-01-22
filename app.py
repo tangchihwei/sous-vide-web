@@ -161,13 +161,6 @@ def task_scheduler(messages):
                 elif message["event"] == "SCHEDULER_TIME_UP":
                     if message["payload"]["timer_name"] == "TIMER_TO_PREHEAT":
                         anova_start_preheat(messages, cook_temp, cook_time)
-                        # packet = message_gen(
-                        #     "TASK_ANOVA", str(get_time()), "ANOVA_PREHEAT",
-                        #     {
-                        #         "cook_temp" : cook_temp,
-                        #         "cook_time" : cook_time
-                        #     })
-                        # messages.append(packet)
 
                 elif message["event"] == "SCHEDULER_PREHEAT_DONE":
                     #TODO:update final ready time
@@ -211,7 +204,6 @@ def task_anova(messages):
     while True:
         if not ble_connection(anova) :
             print "reconnecting"
-            # anova.close()
             try: 
                 anova = AnovaController(ANOVA_MAC_ADDRESS)
             except (TypeError, btle.BTLEException) as e:
