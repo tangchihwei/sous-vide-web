@@ -79,6 +79,16 @@ def ble_connection(anova):
         print str(e) + " connection error"
         val = False
     return val 
+
+def anova_start_preheat(messages, cook_temp, cook_time):
+    print "start anova now"
+    packet = message_gen(
+        "TASK_ANOVA", str(get_time()), "ANOVA_PREHEAT",
+        {
+            "cook_temp" : cook_temp,
+            "cook_time" : cook_time
+        })
+    messages.append(packet)
         
 @app.route('/')
 def index():
@@ -128,11 +138,9 @@ def task_timer(messages, timer_name, min):
 def task_scheduler(messages):
     print "in task scheduler"
     while True:
-#        if get_time_diff(get_time(), ) 
         for i, message in enumerate(messages):
             if message["target"] == "TASK_SCHEDULER":
                 print "event for scheduler: " + str(message)
-                # print str(message)
                 if message["event"] == "ANOVA_ORDER": #new order received
                     cook_time = message["payload"]["cook_time"]
                     cook_temp = message["payload"]["cook_temp"]
@@ -143,14 +151,7 @@ def task_scheduler(messages):
                     time_to_preheat = temp_time - preheat_est(cook_temp) - cook_time
                     print "time to preheat: " + str(time_to_preheat)
                     if time_to_preheat <= 0:
-                        print "start anova now"
-                        packet = message_gen(
-                            "TASK_ANOVA", str(get_time()), "ANOVA_PREHEAT",
-                            {
-                                "cook_temp" : cook_temp,
-                                "cook_time" : cook_time
-                            })
-                        messages.append(packet)
+                        anova_start_preheat(messages, cook_temp, cook_time)
                     else:
                         process_timer = multiprocessing.Process(
                             target = task_timer,
@@ -159,13 +160,7 @@ def task_scheduler(messages):
 
                 elif message["event"] == "SCHEDULER_TIME_UP":
                     if message["payload"]["timer_name"] == "TIMER_TO_PREHEAT":
-                        packet = message_gen(
-                            "TASK_ANOVA", str(get_time()), "ANOVA_PREHEAT",
-                            {
-                                "cook_temp" : cook_temp,
-                                "cook_time" : cook_time
-                            })
-                        messages.append(packet)
+                        anova_start_preheat(messages, cook_temp, cook_time)
 
                 elif message["event"] == "SCHEDULER_PREHEAT_DONE":
                     #TODO:update final ready time
@@ -209,7 +204,6 @@ def task_anova(messages):
     while True:
         if not ble_connection(anova) :
             print "reconnecting"
-            # anova.close()
             try: 
                 anova = AnovaController(ANOVA_MAC_ADDRESS)
             except (TypeError, btle.BTLEException) as e:
@@ -223,7 +217,6 @@ def task_anova(messages):
             except (TypeError, btle.BTLEException) as e:
                 print str(e)
             if not low_water:
-                print "device status : " + device_status 
                 if device_status == "preheating":
                     print "preheating"
                     try: 
@@ -246,27 +239,43 @@ def task_anova(messages):
                         if anova_timer.split()[1] == "running":
                             print "Food still cooking.." + str(anova_timer).split()[0] + "more minutes to go"
                         else:
-                            print "Food is ready"
-                            anova.send_command_async("stop time") #stop anova timer, TODO: need to test further to stop the beeping after done.
-                        # anova.stop_anova() #anova keeps beeping afterwards
-                            anova.set_temp(20)
-                            device_status = "stopped"
+                            print "Food is ready" 
+                            # anova.send_command_async("stop time") #stop anova timer, TODO: need to test further to stop the beeping after done.
+                            try:
+                                anova.stop_anova() #anova keeps beeping afterwards
+                                device_status = "stopped"
+                            except (TypeError, btle.BTLEException) as e:
+                                print str(e) + " unable to stop anova device"
+                            else:
+                                print "anova device was stopped."
 
                 for i, message in enumerate(messages):
                     if message["target"] == "TASK_ANOVA":
+                        message_processed = False
                         print "event for anova: " + str(message)
                         if message["event"] == "ANOVA_PREHEAT":
                             cook_temp = message["payload"]["cook_temp"]
                             cook_time = message["payload"]["cook_time"]
-                            anova.set_temp(cook_temp)
-                            anova.set_timer(cook_time)
-                            anova.start_anova()
-                            device_status = "preheating" #need to validate
+                            try:
+                                anova.set_temp(cook_temp)
+                                anova.set_timer(cook_time)
+                                anova.start_anova()
+                            except (TypeError, btle.BTLEException) as e:
+                                print str(e) + " unable to set temperature and start preheating, connection may have failed"
+                            else:
+                                device_status = "preheating" #need to validate
+                                message_processed = True
                         elif message["event"] == "ANOVA_COOK":
                             print "start timer"
-                            anova.start_timer()
-                            device_status = "cooking"
-                        messages.pop(i)
+                            try:
+                                anova.start_timer()
+                            except (TypeEerror, btle.BTLEException) as e:
+                                print str(e) + " unable to start timer"
+                            else:
+                                device_status = "cooking"
+                                message_processed = True
+                        if message_processed:
+                            messages.pop(i) 
         time.sleep(0.5) #2 Hz message queue
 
 def main():
