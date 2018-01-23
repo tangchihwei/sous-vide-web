@@ -3771,3 +3771,995 @@ temp get time diff: 155
 time to preheat: 40
 03:25 PM -- waiting ...40 min
 03:26 PM -- waiting ...39 min
+03:27 PM -- waiting ...38 min
+03:28 PM -- waiting ...37 min
+03:29 PM -- waiting ...36 min
+03:30 PM -- waiting ...35 min
+03:31 PM -- waiting ...34 min
+03:32 PM -- waiting ...33 min
+03:33 PM -- waiting ...32 min
+03:34 PM -- waiting ...31 min
+03:35 PM -- waiting ...30 min
+03:36 PM -- waiting ...29 min
+03:37 PM -- waiting ...28 min
+03:38 PM -- waiting ...27 min
+03:39 PM -- waiting ...26 min
+03:40 PM -- waiting ...25 min
+03:41 PM -- waiting ...24 min
+03:42 PM -- waiting ...23 min
+03:43 PM -- waiting ...22 min
+03:44 PM -- waiting ...21 min
+03:45 PM -- waiting ...20 min
+03:46 PM -- waiting ...19 min
+03:47 PM -- waiting ...18 min
+03:48 PM -- waiting ...17 min
+03:49 PM -- waiting ...16 min
+03:50 PM -- waiting ...15 min
+03:51 PM -- waiting ...14 min
+03:52 PM -- waiting ...13 min
+03:53 PM -- waiting ...12 min
+03:54 PM -- waiting ...11 min
+03:55 PM -- waiting ...10 min
+03:56 PM -- waiting ...9 min
+03:57 PM -- waiting ...8 min
+03:58 PM -- waiting ...7 min
+03:59 PM -- waiting ...6 min
+04:00 PM -- waiting ...5 min
+04:01 PM -- waiting ...4 min
+04:02 PM -- waiting ...3 min
+04:03 PM -- waiting ...2 min
+04:04 PM -- waiting ...1 min
+new message: {'timestamp': '04:05 PM', 'payload': {'timer_name': 'TIMER_TO_PREHEAT', 'timer_time': 40}, 'target': 'TASK_SCHEDULER', 'event': 'SCHEDULER_TIME_UP'}
+event for scheduler: {'timestamp': '04:05 PM', 'target': 'TASK_SCHEDULER', 'event': 'SCHEDULER_TIME_UP', 'payload': {'timer_name': 'TIMER_TO_PREHEAT', 'timer_time': 40}}
+start anova now
+new message: {'timestamp': '04:05 PM', 'payload': {'cook_temp': 65.5, 'cook_time': 90}, 'target': 'TASK_ANOVA', 'event': 'ANOVA_PREHEAT'}
+event for anova: {'timestamp': '04:05 PM', 'target': 'TASK_ANOVA', 'event': 'ANOVA_PREHEAT', 'payload': {'cook_temp': 65.5, 'cook_time': 90}}
+preheating
+04:05 PM -- preheating, current temp: 21.7 - target temp: 65.5
+preheating
+04:06 PM -- preheating, current temp: 24.0 - target temp: 65.5
+preheating
+04:06 PM -- preheating, current temp: 25.1 - target temp: 65.5
+preheating
+04:06 PM -- preheating, current temp: 26.2 - target temp: 65.5
+preheating
+04:07 PM -- preheating, current temp: 27.3 - target temp: 65.5
+preheating
+04:07 PM -- preheating, current temp: 28.3 - target temp: 65.5
+preheating
+04:07 PM -- preheating, current temp: 29.4 - target temp: 65.5
+preheating
+04:08 PM -- preheating, current temp: 30.4 - target temp: 65.5
+preheating
+04:08 PM -- preheating, current temp: 31.5 - target temp: 65.5
+preheating
+04:09 PM -- preheating, current temp: 32.5 - target temp: 65.5
+preheating
+04:09 PM -- preheating, current temp: 33.5 - target temp: 65.5
+preheating
+04:09 PM -- preheating, current temp: 34.5 - target temp: 65.5
+preheating
+04:10 PM -- preheating, current temp: 35.5 - target temp: 65.5
+preheating
+04:10 PM -- preheating, current temp: 36.5 - target temp: 65.5
+preheating
+04:10 PM -- preheating, current temp: 37.4 - target temp: 65.5
+preheating
+04:11 PM -- preheating, current temp: 38.4 - target temp: 65.5
+preheating
+04:11 PM -- preheating, current temp: 39.4 - target temp: 65.5
+preheating
+04:11 PM -- preheating, current temp: 40.3 - target temp: 65.5
+preheating
+04:12 PM -- preheating, current temp: 41.2 - target temp: 65.5
+preheating
+04:12 PM -- preheating, current temp: 42.1 - target temp: 65.5
+preheating
+04:13 PM -- preheating, current temp: 43.0 - target temp: 65.5
+preheating
+04:13 PM -- preheating, current temp: 44.0 - target temp: 65.5
+preheating
+04:13 PM -- preheating, current temp: 44.9 - target temp: 65.5
+preheating
+04:14 PM -- preheating, current temp: 45.8 - target temp: 65.5
+preheating
+04:14 PM -- preheating, current temp: 46.7 - target temp: 65.5
+preheating
+04:14 PM -- preheating, current temp: 47.6 - target temp: 65.5
+preheating
+04:15 PM -- preheating, current temp: 48.4 - target temp: 65.5
+preheating
+04:15 PM -- preheating, current temp: 49.3 - target temp: 65.5
+preheating
+04:15 PM -- preheating, current temp: 50.2 - target temp: 65.5
+preheating
+04:16 PM -- preheating, current temp: 51.0 - target temp: 65.5
+preheating
+04:16 PM -- preheating, current temp: 51.9 - target temp: 65.5
+preheating
+04:17 PM -- preheating, current temp: 52.7 - target temp: 65.5
+preheating
+04:17 PM -- preheating, current temp: 53.6 - target temp: 65.5
+preheating
+04:17 PM -- preheating, current temp: 54.4 - target temp: 65.5
+preheating
+04:18 PM -- preheating, current temp: 55.2 - target temp: 65.5
+preheating
+04:18 PM -- preheating, current temp: 56.1 - target temp: 65.5
+preheating
+04:18 PM -- preheating, current temp: 56.9 - target temp: 65.5
+preheating
+04:19 PM -- preheating, current temp: 57.7 - target temp: 65.5
+preheating
+04:19 PM -- preheating, current temp: 58.6 - target temp: 65.5
+preheating
+04:20 PM -- preheating, current temp: 59.4 - target temp: 65.5
+preheating
+04:20 PM -- preheating, current temp: 60.1 - target temp: 65.5
+preheating
+04:20 PM -- preheating, current temp: 60.9 - target temp: 65.5
+preheating
+04:21 PM -- preheating, current temp: 61.7 - target temp: 65.5
+preheating
+04:21 PM -- preheating, current temp: 62.4 - target temp: 65.5
+preheating
+04:21 PM -- preheating, current temp: 63.1 - target temp: 65.5
+preheating
+04:22 PM -- preheating, current temp: 63.1 - target temp: 65.5
+preheating
+04:22 PM -- preheating, current temp: 63.4 - target temp: 65.5
+preheating
+04:22 PM -- preheating, current temp: 63.7 - target temp: 65.5
+preheating
+04:23 PM -- preheating, current temp: 63.9 - target temp: 65.5
+preheating
+04:23 PM -- preheating, current temp: 64.1 - target temp: 65.5
+preheating
+04:24 PM -- preheating, current temp: 64.3 - target temp: 65.5
+preheating
+04:24 PM -- preheating, current temp: 64.5 - target temp: 65.5
+preheating
+04:24 PM -- preheating, current temp: 64.6 - target temp: 65.5
+preheating
+04:25 PM -- preheating, current temp: 64.8 - target temp: 65.5
+preheating
+04:25 PM -- preheating, current temp: 64.9 - target temp: 65.5
+preheating
+04:25 PM -- preheating, current temp: 65.0 - target temp: 65.5
+preheating
+04:26 PM -- preheating, current temp: 65.0 - target temp: 65.5
+preheating
+04:26 PM -- preheating, current temp: 65.1 - target temp: 65.5
+preheating
+04:27 PM -- preheating, current temp: 65.2 - target temp: 65.5
+preheating
+04:27 PM -- preheating, current temp: 65.2 - target temp: 65.5
+preheating
+04:27 PM -- preheating, current temp: 65.3 - target temp: 65.5
+preheating
+04:28 PM -- preheating, current temp: 65.3 - target temp: 65.5
+preheating
+04:28 PM -- preheating, current temp: 65.3 - target temp: 65.5
+preheating
+04:28 PM -- preheating, current temp: 65.4 - target temp: 65.5
+preheating
+04:29 PM -- preheating, current temp: 65.4 - target temp: 65.5
+preheating
+04:29 PM -- preheating, current temp: 65.4 - target temp: 65.5
+preheating
+04:29 PM -- preheating, current temp: 65.4 - target temp: 65.5
+preheating
+preheating completed
+new message: {'timestamp': '04:30 PM', 'payload': {}, 'target': 'TASK_SCHEDULER', 'event': 'SCHEDULER_PREHEAT_DONE'}
+event for scheduler: {'timestamp': '04:30 PM', 'target': 'TASK_SCHEDULER', 'event': 'SCHEDULER_PREHEAT_DONE', 'payload': {}}
+preheat done
+new message: {'timestamp': '04:30 PM', 'payload': {}, 'target': 'TASK_ANOVA', 'event': 'ANOVA_COOK'}
+event for anova: {'timestamp': '04:30 PM', 'target': 'TASK_ANOVA', 'event': 'ANOVA_COOK', 'payload': {}}
+start timer
+Food still cooking..90more minutes to go
+Food still cooking..90more minutes to go
+Food still cooking..90more minutes to go
+Food still cooking..90more minutes to go
+Food still cooking..90more minutes to go
+Food still cooking..90more minutes to go
+Food still cooking..90more minutes to go
+Food still cooking..90more minutes to go
+Food still cooking..90more minutes to go
+Food still cooking..90more minutes to go
+Food still cooking..90more minutes to go
+Food still cooking..90more minutes to go
+Food still cooking..90more minutes to go
+Food still cooking..90more minutes to go
+Food still cooking..90more minutes to go
+Food still cooking..90more minutes to go
+Food still cooking..90more minutes to go
+Food still cooking..90more minutes to go
+Food still cooking..90more minutes to go
+Food still cooking..90more minutes to go
+Food still cooking..90more minutes to go
+Food still cooking..90more minutes to go
+Food still cooking..90more minutes to go
+Food still cooking..90more minutes to go
+Food still cooking..90more minutes to go
+Food still cooking..90more minutes to go
+Food still cooking..90more minutes to go
+Food still cooking..90more minutes to go
+Food still cooking..89more minutes to go
+Food still cooking..89more minutes to go
+Food still cooking..89more minutes to go
+Food still cooking..89more minutes to go
+Food still cooking..89more minutes to go
+Food still cooking..89more minutes to go
+Food still cooking..89more minutes to go
+Food still cooking..89more minutes to go
+Food still cooking..89more minutes to go
+Food still cooking..89more minutes to go
+Food still cooking..89more minutes to go
+Food still cooking..89more minutes to go
+Food still cooking..89more minutes to go
+Food still cooking..89more minutes to go
+Food still cooking..89more minutes to go
+Food still cooking..89more minutes to go
+Food still cooking..89more minutes to go
+Food still cooking..89more minutes to go
+Food still cooking..89more minutes to go
+Food still cooking..89more minutes to go
+Food still cooking..89more minutes to go
+Food still cooking..89more minutes to go
+Food still cooking..89more minutes to go
+Food still cooking..89more minutes to go
+Food still cooking..89more minutes to go
+Food still cooking..89more minutes to go
+Food still cooking..89more minutes to go
+Food still cooking..89more minutes to go
+Food still cooking..89more minutes to go
+Food still cooking..89more minutes to go
+Food still cooking..88more minutes to go
+Food still cooking..88more minutes to go
+Food still cooking..88more minutes to go
+Food still cooking..88more minutes to go
+Food still cooking..88more minutes to go
+Food still cooking..88more minutes to go
+Food still cooking..88more minutes to go
+Food still cooking..88more minutes to go
+Food still cooking..88more minutes to go
+Food still cooking..88more minutes to go
+Food still cooking..88more minutes to go
+Food still cooking..88more minutes to go
+Food still cooking..88more minutes to go
+Food still cooking..88more minutes to go
+Food still cooking..88more minutes to go
+Food still cooking..88more minutes to go
+Food still cooking..88more minutes to go
+Food still cooking..88more minutes to go
+Food still cooking..88more minutes to go
+Food still cooking..88more minutes to go
+Food still cooking..88more minutes to go
+Food still cooking..88more minutes to go
+Food still cooking..88more minutes to go
+Food still cooking..88more minutes to go
+Food still cooking..88more minutes to go
+Food still cooking..88more minutes to go
+Food still cooking..88more minutes to go
+Food still cooking..88more minutes to go
+Food still cooking..88more minutes to go
+Food still cooking..88more minutes to go
+Food still cooking..87more minutes to go
+Food still cooking..87more minutes to go
+Food still cooking..87more minutes to go
+Food still cooking..87more minutes to go
+Food still cooking..87more minutes to go
+Food still cooking..87more minutes to go
+Food still cooking..87more minutes to go
+Food still cooking..87more minutes to go
+Food still cooking..87more minutes to go
+Food still cooking..87more minutes to go
+Food still cooking..87more minutes to go
+Food still cooking..87more minutes to go
+Food still cooking..87more minutes to go
+Food still cooking..87more minutes to go
+Food still cooking..87more minutes to go
+Food still cooking..87more minutes to go
+Food still cooking..87more minutes to go
+Food still cooking..87more minutes to go
+Food still cooking..87more minutes to go
+Food still cooking..87more minutes to go
+Food still cooking..87more minutes to go
+Food still cooking..87more minutes to go
+Food still cooking..87more minutes to go
+Food still cooking..87more minutes to go
+Food still cooking..87more minutes to go
+Food still cooking..87more minutes to go
+Food still cooking..87more minutes to go
+Food still cooking..87more minutes to go
+Food still cooking..87more minutes to go
+Food still cooking..87more minutes to go
+Food still cooking..86more minutes to go
+Food still cooking..86more minutes to go
+Food still cooking..86more minutes to go
+Food still cooking..86more minutes to go
+Food still cooking..86more minutes to go
+Food still cooking..86more minutes to go
+Food still cooking..86more minutes to go
+Food still cooking..86more minutes to go
+Food still cooking..86more minutes to go
+Food still cooking..86more minutes to go
+Food still cooking..86more minutes to go
+Food still cooking..86more minutes to go
+Food still cooking..86more minutes to go
+Food still cooking..86more minutes to go
+Food still cooking..86more minutes to go
+Food still cooking..86more minutes to go
+Food still cooking..86more minutes to go
+Food still cooking..86more minutes to go
+Food still cooking..86more minutes to go
+Food still cooking..86more minutes to go
+Food still cooking..86more minutes to go
+Food still cooking..86more minutes to go
+Food still cooking..86more minutes to go
+Food still cooking..86more minutes to go
+Food still cooking..86more minutes to go
+Food still cooking..86more minutes to go
+Food still cooking..86more minutes to go
+Food still cooking..86more minutes to go
+Food still cooking..86more minutes to go
+Food still cooking..86more minutes to go
+Food still cooking..85more minutes to go
+Food still cooking..85more minutes to go
+Food still cooking..85more minutes to go
+Food still cooking..85more minutes to go
+Food still cooking..85more minutes to go
+Food still cooking..85more minutes to go
+Food still cooking..85more minutes to go
+Food still cooking..85more minutes to go
+Food still cooking..85more minutes to go
+Food still cooking..85more minutes to go
+Food still cooking..85more minutes to go
+Food still cooking..85more minutes to go
+Food still cooking..85more minutes to go
+Food still cooking..85more minutes to go
+Food still cooking..85more minutes to go
+Food still cooking..85more minutes to go
+Food still cooking..85more minutes to go
+Food still cooking..85more minutes to go
+Food still cooking..85more minutes to go
+Food still cooking..85more minutes to go
+Food still cooking..85more minutes to go
+Food still cooking..85more minutes to go
+Food still cooking..85more minutes to go
+Food still cooking..85more minutes to go
+Food still cooking..85more minutes to go
+Food still cooking..85more minutes to go
+Food still cooking..85more minutes to go
+Food still cooking..85more minutes to go
+Food still cooking..85more minutes to go
+Food still cooking..85more minutes to go
+Food still cooking..84more minutes to go
+Food still cooking..84more minutes to go
+Food still cooking..84more minutes to go
+Food still cooking..84more minutes to go
+Food still cooking..84more minutes to go
+Food still cooking..84more minutes to go
+Food still cooking..84more minutes to go
+Food still cooking..84more minutes to go
+Food still cooking..84more minutes to go
+Food still cooking..84more minutes to go
+Food still cooking..84more minutes to go
+Food still cooking..84more minutes to go
+Food still cooking..84more minutes to go
+Food still cooking..84more minutes to go
+Food still cooking..84more minutes to go
+Food still cooking..84more minutes to go
+Food still cooking..84more minutes to go
+Food still cooking..84more minutes to go
+Food still cooking..84more minutes to go
+Food still cooking..84more minutes to go
+Food still cooking..84more minutes to go
+Food still cooking..84more minutes to go
+Food still cooking..84more minutes to go
+Food still cooking..84more minutes to go
+Food still cooking..84more minutes to go
+Food still cooking..84more minutes to go
+Food still cooking..84more minutes to go
+Food still cooking..84more minutes to go
+Food still cooking..84more minutes to go
+Food still cooking..83more minutes to go
+Food still cooking..83more minutes to go
+Food still cooking..83more minutes to go
+Food still cooking..83more minutes to go
+Food still cooking..83more minutes to go
+Food still cooking..83more minutes to go
+Food still cooking..83more minutes to go
+Food still cooking..83more minutes to go
+Food still cooking..83more minutes to go
+Food still cooking..83more minutes to go
+Food still cooking..83more minutes to go
+Food still cooking..83more minutes to go
+Food still cooking..83more minutes to go
+Food still cooking..83more minutes to go
+Food still cooking..83more minutes to go
+Food still cooking..83more minutes to go
+Food still cooking..83more minutes to go
+Food still cooking..83more minutes to go
+Food still cooking..83more minutes to go
+Food still cooking..83more minutes to go
+Food still cooking..83more minutes to go
+Food still cooking..83more minutes to go
+Food still cooking..83more minutes to go
+Food still cooking..83more minutes to go
+Food still cooking..83more minutes to go
+Food still cooking..83more minutes to go
+Food still cooking..83more minutes to go
+Food still cooking..83more minutes to go
+Food still cooking..83more minutes to go
+Food still cooking..83more minutes to go
+Food still cooking..82more minutes to go
+Food still cooking..82more minutes to go
+Food still cooking..82more minutes to go
+Food still cooking..82more minutes to go
+Food still cooking..82more minutes to go
+Food still cooking..82more minutes to go
+Food still cooking..82more minutes to go
+Food still cooking..82more minutes to go
+Food still cooking..82more minutes to go
+Food still cooking..82more minutes to go
+Food still cooking..82more minutes to go
+Food still cooking..82more minutes to go
+Food still cooking..82more minutes to go
+Food still cooking..82more minutes to go
+Food still cooking..82more minutes to go
+Food still cooking..82more minutes to go
+Food still cooking..82more minutes to go
+Food still cooking..82more minutes to go
+Food still cooking..82more minutes to go
+Food still cooking..82more minutes to go
+Food still cooking..82more minutes to go
+Food still cooking..82more minutes to go
+Food still cooking..82more minutes to go
+Food still cooking..82more minutes to go
+Food still cooking..82more minutes to go
+Food still cooking..82more minutes to go
+Food still cooking..82more minutes to go
+Food still cooking..82more minutes to go
+Food still cooking..82more minutes to go
+Food still cooking..82more minutes to go
+Food still cooking..81more minutes to go
+Food still cooking..81more minutes to go
+Food still cooking..81more minutes to go
+Food still cooking..81more minutes to go
+Food still cooking..81more minutes to go
+Food still cooking..81more minutes to go
+Food still cooking..81more minutes to go
+Food still cooking..81more minutes to go
+Food still cooking..81more minutes to go
+Food still cooking..81more minutes to go
+Food still cooking..81more minutes to go
+Food still cooking..81more minutes to go
+Food still cooking..81more minutes to go
+Food still cooking..81more minutes to go
+Food still cooking..81more minutes to go
+Food still cooking..81more minutes to go
+Food still cooking..81more minutes to go
+Food still cooking..81more minutes to go
+Food still cooking..81more minutes to go
+Food still cooking..81more minutes to go
+Food still cooking..81more minutes to go
+Food still cooking..81more minutes to go
+Food still cooking..81more minutes to go
+Food still cooking..81more minutes to go
+Food still cooking..81more minutes to go
+Food still cooking..81more minutes to go
+Food still cooking..81more minutes to go
+Food still cooking..81more minutes to go
+Food still cooking..81more minutes to go
+Food still cooking..81more minutes to go
+Food still cooking..80more minutes to go
+Food still cooking..80more minutes to go
+Food still cooking..80more minutes to go
+Food still cooking..80more minutes to go
+Food still cooking..80more minutes to go
+Food still cooking..80more minutes to go
+Food still cooking..80more minutes to go
+Food still cooking..80more minutes to go
+Food still cooking..80more minutes to go
+Food still cooking..80more minutes to go
+Food still cooking..80more minutes to go
+Food still cooking..80more minutes to go
+Food still cooking..80more minutes to go
+Food still cooking..80more minutes to go
+Food still cooking..80more minutes to go
+Food still cooking..80more minutes to go
+Food still cooking..80more minutes to go
+Food still cooking..80more minutes to go
+Food still cooking..80more minutes to go
+Food still cooking..80more minutes to go
+Food still cooking..80more minutes to go
+Food still cooking..80more minutes to go
+Food still cooking..80more minutes to go
+Food still cooking..80more minutes to go
+Food still cooking..80more minutes to go
+Food still cooking..80more minutes to go
+Food still cooking..80more minutes to go
+Food still cooking..80more minutes to go
+Food still cooking..80more minutes to go
+Food still cooking..79more minutes to go
+Food still cooking..79more minutes to go
+Food still cooking..79more minutes to go
+Food still cooking..79more minutes to go
+Food still cooking..79more minutes to go
+Food still cooking..79more minutes to go
+Food still cooking..79more minutes to go
+Food still cooking..79more minutes to go
+Food still cooking..79more minutes to go
+Food still cooking..79more minutes to go
+Food still cooking..79more minutes to go
+Food still cooking..79more minutes to go
+Food still cooking..79more minutes to go
+Food still cooking..79more minutes to go
+Food still cooking..79more minutes to go
+Food still cooking..79more minutes to go
+Food still cooking..79more minutes to go
+Food still cooking..79more minutes to go
+Food still cooking..79more minutes to go
+Food still cooking..79more minutes to go
+Food still cooking..79more minutes to go
+Food still cooking..79more minutes to go
+Food still cooking..79more minutes to go
+Food still cooking..79more minutes to go
+Food still cooking..79more minutes to go
+Food still cooking..79more minutes to go
+Food still cooking..79more minutes to go
+Food still cooking..79more minutes to go
+Food still cooking..79more minutes to go
+Food still cooking..79more minutes to go
+Food still cooking..78more minutes to go
+Food still cooking..78more minutes to go
+Food still cooking..78more minutes to go
+Food still cooking..78more minutes to go
+Food still cooking..78more minutes to go
+Food still cooking..78more minutes to go
+Food still cooking..78more minutes to go
+Food still cooking..78more minutes to go
+Food still cooking..78more minutes to go
+Food still cooking..78more minutes to go
+Food still cooking..78more minutes to go
+Food still cooking..78more minutes to go
+Food still cooking..78more minutes to go
+Food still cooking..78more minutes to go
+Food still cooking..78more minutes to go
+Food still cooking..78more minutes to go
+Food still cooking..78more minutes to go
+Food still cooking..78more minutes to go
+Food still cooking..78more minutes to go
+Food still cooking..78more minutes to go
+Food still cooking..78more minutes to go
+Food still cooking..78more minutes to go
+Food still cooking..78more minutes to go
+Food still cooking..78more minutes to go
+Food still cooking..78more minutes to go
+Food still cooking..78more minutes to go
+Food still cooking..78more minutes to go
+Food still cooking..78more minutes to go
+Food still cooking..78more minutes to go
+Food still cooking..78more minutes to go
+Food still cooking..77more minutes to go
+Food still cooking..77more minutes to go
+Food still cooking..77more minutes to go
+Food still cooking..77more minutes to go
+Food still cooking..77more minutes to go
+Food still cooking..77more minutes to go
+Food still cooking..77more minutes to go
+Food still cooking..77more minutes to go
+Food still cooking..77more minutes to go
+Food still cooking..77more minutes to go
+Food still cooking..77more minutes to go
+Food still cooking..77more minutes to go
+Food still cooking..77more minutes to go
+Food still cooking..77more minutes to go
+Food still cooking..77more minutes to go
+Food still cooking..77more minutes to go
+Food still cooking..77more minutes to go
+Food still cooking..77more minutes to go
+Food still cooking..77more minutes to go
+Food still cooking..77more minutes to go
+Food still cooking..77more minutes to go
+Food still cooking..77more minutes to go
+Food still cooking..77more minutes to go
+Food still cooking..77more minutes to go
+Food still cooking..77more minutes to go
+Food still cooking..77more minutes to go
+Food still cooking..77more minutes to go
+Food still cooking..77more minutes to go
+Food still cooking..77more minutes to go
+Food still cooking..77more minutes to go
+Food still cooking..76more minutes to go
+Food still cooking..76more minutes to go
+Food still cooking..76more minutes to go
+Food still cooking..76more minutes to go
+Food still cooking..76more minutes to go
+Food still cooking..76more minutes to go
+Food still cooking..76more minutes to go
+Food still cooking..76more minutes to go
+Food still cooking..76more minutes to go
+Food still cooking..76more minutes to go
+Food still cooking..76more minutes to go
+Food still cooking..76more minutes to go
+Food still cooking..76more minutes to go
+Food still cooking..76more minutes to go
+Food still cooking..76more minutes to go
+Food still cooking..76more minutes to go
+Food still cooking..76more minutes to go
+Food still cooking..76more minutes to go
+Food still cooking..76more minutes to go
+Food still cooking..76more minutes to go
+Food still cooking..76more minutes to go
+Food still cooking..76more minutes to go
+Food still cooking..76more minutes to go
+Food still cooking..76more minutes to go
+Food still cooking..76more minutes to go
+Food still cooking..76more minutes to go
+Food still cooking..76more minutes to go
+Food still cooking..76more minutes to go
+Food still cooking..76more minutes to go
+Food still cooking..75more minutes to go
+Food still cooking..75more minutes to go
+Food still cooking..75more minutes to go
+Food still cooking..75more minutes to go
+Food still cooking..75more minutes to go
+Food still cooking..75more minutes to go
+Food still cooking..75more minutes to go
+Food still cooking..75more minutes to go
+Food still cooking..75more minutes to go
+Food still cooking..75more minutes to go
+Food still cooking..75more minutes to go
+Food still cooking..75more minutes to go
+Food still cooking..75more minutes to go
+Food still cooking..75more minutes to go
+Food still cooking..75more minutes to go
+Food still cooking..75more minutes to go
+Food still cooking..75more minutes to go
+Food still cooking..75more minutes to go
+Food still cooking..75more minutes to go
+Food still cooking..75more minutes to go
+Food still cooking..75more minutes to go
+Food still cooking..75more minutes to go
+Food still cooking..75more minutes to go
+Food still cooking..75more minutes to go
+Food still cooking..75more minutes to go
+Food still cooking..75more minutes to go
+Food still cooking..75more minutes to go
+Food still cooking..75more minutes to go
+Food still cooking..75more minutes to go
+Food still cooking..75more minutes to go
+Food still cooking..74more minutes to go
+Food still cooking..74more minutes to go
+Food still cooking..74more minutes to go
+Food still cooking..74more minutes to go
+Food still cooking..74more minutes to go
+Food still cooking..74more minutes to go
+Food still cooking..74more minutes to go
+Food still cooking..74more minutes to go
+Food still cooking..74more minutes to go
+Food still cooking..74more minutes to go
+Food still cooking..74more minutes to go
+Food still cooking..74more minutes to go
+Food still cooking..74more minutes to go
+Food still cooking..74more minutes to go
+Food still cooking..74more minutes to go
+Food still cooking..74more minutes to go
+Food still cooking..74more minutes to go
+Food still cooking..74more minutes to go
+Food still cooking..74more minutes to go
+Food still cooking..74more minutes to go
+Food still cooking..74more minutes to go
+Food still cooking..74more minutes to go
+Food still cooking..74more minutes to go
+Food still cooking..74more minutes to go
+Food still cooking..74more minutes to go
+Food still cooking..74more minutes to go
+Food still cooking..74more minutes to go
+Food still cooking..74more minutes to go
+Food still cooking..74more minutes to go
+Food still cooking..74more minutes to go
+Food still cooking..73more minutes to go
+Food still cooking..73more minutes to go
+Food still cooking..73more minutes to go
+Food still cooking..73more minutes to go
+Food still cooking..73more minutes to go
+Food still cooking..73more minutes to go
+Food still cooking..73more minutes to go
+Food still cooking..73more minutes to go
+Food still cooking..73more minutes to go
+Food still cooking..73more minutes to go
+Food still cooking..73more minutes to go
+Food still cooking..73more minutes to go
+Food still cooking..73more minutes to go
+Food still cooking..73more minutes to go
+Food still cooking..73more minutes to go
+Food still cooking..73more minutes to go
+Food still cooking..73more minutes to go
+Food still cooking..73more minutes to go
+Food still cooking..73more minutes to go
+Food still cooking..73more minutes to go
+Food still cooking..73more minutes to go
+Food still cooking..73more minutes to go
+Food still cooking..73more minutes to go
+Food still cooking..73more minutes to go
+Food still cooking..73more minutes to go
+Food still cooking..73more minutes to go
+Food still cooking..73more minutes to go
+Food still cooking..73more minutes to go
+Food still cooking..73more minutes to go
+Food still cooking..72more minutes to go
+Food still cooking..72more minutes to go
+Food still cooking..72more minutes to go
+Food still cooking..72more minutes to go
+Food still cooking..72more minutes to go
+Food still cooking..72more minutes to go
+Food still cooking..72more minutes to go
+Food still cooking..72more minutes to go
+Food still cooking..72more minutes to go
+Food still cooking..72more minutes to go
+Food still cooking..72more minutes to go
+Food still cooking..72more minutes to go
+Food still cooking..72more minutes to go
+Food still cooking..72more minutes to go
+Food still cooking..72more minutes to go
+Food still cooking..72more minutes to go
+Food still cooking..72more minutes to go
+Food still cooking..72more minutes to go
+Food still cooking..72more minutes to go
+Food still cooking..72more minutes to go
+Food still cooking..72more minutes to go
+Food still cooking..72more minutes to go
+Food still cooking..72more minutes to go
+Food still cooking..72more minutes to go
+Food still cooking..72more minutes to go
+Food still cooking..72more minutes to go
+Food still cooking..72more minutes to go
+Food still cooking..72more minutes to go
+Food still cooking..72more minutes to go
+Food still cooking..72more minutes to go
+Food still cooking..71more minutes to go
+Food still cooking..71more minutes to go
+Food still cooking..71more minutes to go
+Food still cooking..71more minutes to go
+Food still cooking..71more minutes to go
+Food still cooking..71more minutes to go
+Food still cooking..71more minutes to go
+Food still cooking..71more minutes to go
+Food still cooking..71more minutes to go
+Food still cooking..71more minutes to go
+Food still cooking..71more minutes to go
+Food still cooking..71more minutes to go
+Food still cooking..71more minutes to go
+Food still cooking..71more minutes to go
+Food still cooking..71more minutes to go
+Food still cooking..71more minutes to go
+Food still cooking..71more minutes to go
+Food still cooking..71more minutes to go
+Food still cooking..71more minutes to go
+Food still cooking..71more minutes to go
+Food still cooking..71more minutes to go
+Food still cooking..71more minutes to go
+Food still cooking..71more minutes to go
+Food still cooking..71more minutes to go
+Food still cooking..71more minutes to go
+Food still cooking..71more minutes to go
+Food still cooking..71more minutes to go
+Food still cooking..71more minutes to go
+Food still cooking..71more minutes to go
+Food still cooking..71more minutes to go
+Food still cooking..70more minutes to go
+Food still cooking..70more minutes to go
+Food still cooking..70more minutes to go
+Food still cooking..70more minutes to go
+Food still cooking..70more minutes to go
+Food still cooking..70more minutes to go
+Food still cooking..70more minutes to go
+Food still cooking..70more minutes to go
+Food still cooking..70more minutes to go
+Food still cooking..70more minutes to go
+Food still cooking..70more minutes to go
+Food still cooking..70more minutes to go
+Food still cooking..70more minutes to go
+Food still cooking..70more minutes to go
+Food still cooking..70more minutes to go
+Food still cooking..70more minutes to go
+Food still cooking..70more minutes to go
+Food still cooking..70more minutes to go
+Food still cooking..70more minutes to go
+Food still cooking..70more minutes to go
+Food still cooking..70more minutes to go
+Food still cooking..70more minutes to go
+Food still cooking..70more minutes to go
+Food still cooking..70more minutes to go
+Food still cooking..70more minutes to go
+Food still cooking..70more minutes to go
+Food still cooking..70more minutes to go
+Food still cooking..70more minutes to go
+Food still cooking..70more minutes to go
+Food still cooking..69more minutes to go
+Food still cooking..69more minutes to go
+Food still cooking..69more minutes to go
+Food still cooking..69more minutes to go
+Food still cooking..69more minutes to go
+Food still cooking..69more minutes to go
+Food still cooking..69more minutes to go
+Food still cooking..69more minutes to go
+Food still cooking..69more minutes to go
+Food still cooking..69more minutes to go
+Food still cooking..69more minutes to go
+Food still cooking..69more minutes to go
+Food still cooking..69more minutes to go
+Food still cooking..69more minutes to go
+Food still cooking..69more minutes to go
+Food still cooking..69more minutes to go
+Food still cooking..69more minutes to go
+Food still cooking..69more minutes to go
+Food still cooking..69more minutes to go
+Food still cooking..69more minutes to go
+Food still cooking..69more minutes to go
+Food still cooking..69more minutes to go
+Food still cooking..69more minutes to go
+Food still cooking..69more minutes to go
+Food still cooking..69more minutes to go
+Food still cooking..69more minutes to go
+Food still cooking..69more minutes to go
+Food still cooking..69more minutes to go
+Food still cooking..69more minutes to go
+Food still cooking..69more minutes to go
+Food still cooking..68more minutes to go
+Food still cooking..68more minutes to go
+Food still cooking..68more minutes to go
+Food still cooking..68more minutes to go
+Food still cooking..68more minutes to go
+Food still cooking..68more minutes to go
+Food still cooking..68more minutes to go
+Food still cooking..68more minutes to go
+Food still cooking..68more minutes to go
+Food still cooking..68more minutes to go
+Food still cooking..68more minutes to go
+Food still cooking..68more minutes to go
+Food still cooking..68more minutes to go
+Food still cooking..68more minutes to go
+Food still cooking..68more minutes to go
+Food still cooking..68more minutes to go
+Food still cooking..68more minutes to go
+Food still cooking..68more minutes to go
+Food still cooking..68more minutes to go
+Food still cooking..68more minutes to go
+Food still cooking..68more minutes to go
+Food still cooking..68more minutes to go
+Food still cooking..68more minutes to go
+Food still cooking..68more minutes to go
+Food still cooking..68more minutes to go
+Food still cooking..68more minutes to go
+Food still cooking..68more minutes to go
+Food still cooking..68more minutes to go
+Food still cooking..68more minutes to go
+Food still cooking..68more minutes to go
+Food still cooking..67more minutes to go
+Food still cooking..67more minutes to go
+Food still cooking..67more minutes to go
+Food still cooking..67more minutes to go
+Food still cooking..67more minutes to go
+Food still cooking..67more minutes to go
+Food still cooking..67more minutes to go
+Food still cooking..67more minutes to go
+Food still cooking..67more minutes to go
+Food still cooking..67more minutes to go
+Food still cooking..67more minutes to go
+Food still cooking..67more minutes to go
+Food still cooking..67more minutes to go
+Food still cooking..67more minutes to go
+Food still cooking..67more minutes to go
+Food still cooking..67more minutes to go
+Food still cooking..67more minutes to go
+Food still cooking..67more minutes to go
+Food still cooking..67more minutes to go
+Food still cooking..67more minutes to go
+Food still cooking..67more minutes to go
+Food still cooking..67more minutes to go
+Food still cooking..67more minutes to go
+Food still cooking..67more minutes to go
+Food still cooking..67more minutes to go
+Food still cooking..67more minutes to go
+Food still cooking..67more minutes to go
+Food still cooking..67more minutes to go
+Food still cooking..67more minutes to go
+Food still cooking..66more minutes to go
+Food still cooking..66more minutes to go
+Food still cooking..66more minutes to go
+Food still cooking..66more minutes to go
+Food still cooking..66more minutes to go
+Food still cooking..66more minutes to go
+Food still cooking..66more minutes to go
+Food still cooking..66more minutes to go
+Food still cooking..66more minutes to go
+Food still cooking..66more minutes to go
+Food still cooking..66more minutes to go
+Food still cooking..66more minutes to go
+Food still cooking..66more minutes to go
+Food still cooking..66more minutes to go
+Food still cooking..66more minutes to go
+Food still cooking..66more minutes to go
+Food still cooking..66more minutes to go
+Food still cooking..66more minutes to go
+Food still cooking..66more minutes to go
+Food still cooking..66more minutes to go
+Food still cooking..66more minutes to go
+Food still cooking..66more minutes to go
+Food still cooking..66more minutes to go
+Food still cooking..66more minutes to go
+Food still cooking..66more minutes to go
+Food still cooking..66more minutes to go
+Food still cooking..66more minutes to go
+Food still cooking..66more minutes to go
+Food still cooking..66more minutes to go
+Food still cooking..65more minutes to go
+Food still cooking..65more minutes to go
+Food still cooking..65more minutes to go
+Food still cooking..65more minutes to go
+Food still cooking..65more minutes to go
+Food still cooking..65more minutes to go
+Food still cooking..65more minutes to go
+Food still cooking..65more minutes to go
+Food still cooking..65more minutes to go
+Food still cooking..65more minutes to go
+Food still cooking..65more minutes to go
+Food still cooking..65more minutes to go
+Food still cooking..65more minutes to go
+Food still cooking..65more minutes to go
+Food still cooking..65more minutes to go
+Food still cooking..65more minutes to go
+Food still cooking..65more minutes to go
+Food still cooking..65more minutes to go
+Food still cooking..65more minutes to go
+Food still cooking..65more minutes to go
+Food still cooking..65more minutes to go
+Food still cooking..65more minutes to go
+Food still cooking..65more minutes to go
+Food still cooking..65more minutes to go
+Food still cooking..65more minutes to go
+Food still cooking..65more minutes to go
+Food still cooking..65more minutes to go
+Food still cooking..65more minutes to go
+Food still cooking..65more minutes to go
+Food still cooking..64more minutes to go
+Food still cooking..64more minutes to go
+Food still cooking..64more minutes to go
+Food still cooking..64more minutes to go
+Food still cooking..64more minutes to go
+Food still cooking..64more minutes to go
+Food still cooking..64more minutes to go
+Food still cooking..64more minutes to go
+Food still cooking..64more minutes to go
+Food still cooking..64more minutes to go
+Food still cooking..64more minutes to go
+Food still cooking..64more minutes to go
+Food still cooking..64more minutes to go
+Food still cooking..64more minutes to go
+Food still cooking..64more minutes to go
+Food still cooking..64more minutes to go
+Food still cooking..64more minutes to go
+Food still cooking..64more minutes to go
+Food still cooking..64more minutes to go
+Food still cooking..64more minutes to go
+Food still cooking..64more minutes to go
+Food still cooking..64more minutes to go
+Food still cooking..64more minutes to go
+Food still cooking..64more minutes to go
+Food still cooking..64more minutes to go
+Food still cooking..64more minutes to go
+Food still cooking..64more minutes to go
+Food still cooking..64more minutes to go
+Food still cooking..64more minutes to go
+Food still cooking..64more minutes to go
+Food still cooking..63more minutes to go
+Food still cooking..63more minutes to go
+Food still cooking..63more minutes to go
+Food still cooking..63more minutes to go
+Food still cooking..63more minutes to go
+Food still cooking..63more minutes to go
+Food still cooking..63more minutes to go
